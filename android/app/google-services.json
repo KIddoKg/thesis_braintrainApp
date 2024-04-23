@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "183795384114",
+    "project_id": "braintrain-62f15",
+    "storage_bucket": "braintrain-62f15.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183795384114:android:d3c7cdd9f6203ebfa9e12b",
+        "android_client_info": {
+          "package_name": "com.bmeit.brain_train_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcT4fK9ap0S3eGEeCV_G5lzd4m4XXfoKQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183795384114:android:4232a537976e553ba9e12b",
+        "android_client_info": {
+          "package_name": "com.example.brain_train_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcT4fK9ap0S3eGEeCV_G5lzd4m4XXfoKQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183795384114:android:6ce782a702a453aaa9e12b",
+        "android_client_info": {
+          "package_name": "com.example.flutter_firebase_notifications"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcT4fK9ap0S3eGEeCV_G5lzd4m4XXfoKQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

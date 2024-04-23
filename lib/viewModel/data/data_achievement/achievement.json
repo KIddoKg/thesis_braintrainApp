@@ -1,0 +1,65 @@
+{
+  "achievements": [
+    {
+      "title": "Thành tựu 1",
+      "subTitle": "Mô tả thành tựu 1",
+      "percent": 5,
+      "maxCount": 10,
+      "levels": "Level 3",
+      "nameImg": "1.jpg",
+      "achievementDates": [
+        {
+          "date": "2023-09-12",
+          "title": "Date 1",
+          "subTitle": "Description 1",
+          "levels": "Level 1",
+          "nameImg": "1.jpg"
+        },
+        {
+          "date": "2023-09-15",
+          "title": "Date 2",
+          "subTitle": "Description 2",
+          "levels": "Level 2",
+          "nameImg": "1.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Thành tựu 2",
+      "subTitle": "Mô tả thành tựu 2",
+      "percent": 0,
+      "maxCount": 1,
+      "levels": "Level 2",
+      "nameImg": "1.jpg",
+      "achievementDates": [
+      ]
+    },
+    {
+      "title": "Thành tựu 2",
+      "subTitle": "Mô tả thành tựu 2",
+      "percent": 0,
+      "maxCount": 1,
+      "levels": "Level 1",
+      "nameImg": "1.jpg",
+      "achievementDates": [
+        {
+          "date": "2023-09-10",
+          "title": "Date 1",
+          "subTitle": "Description 1",
+          "levels": "Level 1",
+          "nameImg": "1.jpg"
+        }
+      ]
+    },  {
+      "title": "Thành tựu 2",
+      "subTitle": "Mô tả thành tựu 2",
+      "percent": 0,
+      "maxCount": 1,
+      "levels": "Level 1",
+      "nameImg": "1.jpg",
+      "achievementDates": [
+
+      ]
+    }
+  ]
+}
