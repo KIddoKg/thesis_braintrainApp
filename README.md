@@ -17,7 +17,7 @@ After install all requirement, open your terminal run "flutter doctor" to check 
 
 - Import the source code by using vsCode or AndroidStudio (IntelliJ).
 - Open the file pubspec.yaml and click the "pub get" on right above:
-  ![Screenshot 2024-04-18 at 12.24.53.png](..%2F..%2F..%2F..%2F..%2FDesktop%2FScreenshot%202024-04-18%20at%2012.24.53.png)
+  <img width="1662" alt="Screenshot 2024-04-18 at 12 24 53" src="https://github.com/KIddoKg/brain_train_app/assets/73632319/242e924c-80f1-4346-9fb5-acd20bb4511b">
   Or you can open the terminal on this project location and run "flutter pub get" to down all library before run code
 
 ## Install the virtual device
