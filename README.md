@@ -24,7 +24,7 @@ After install all requirement, open your terminal run "flutter doctor" to check 
 
 - With run Android virtual device
   + Open the AndroidStudio at the first page to open project, click "tool" choose Device Manager:
-   ![Screenshot 2024-04-23 at 10.02.29.png](..%2F..%2F..%2F..%2F..%2FDesktop%2FScreenshot%202024-04-23%20at%2010.02.29.png)
+  + <img width="297" alt="Screenshot 2024-04-23 at 10 02 29" src="https://github.com/KIddoKg/thesis_braintrainApp/assets/73632319/32dea05f-00ee-40de-b81f-0072a786d95c">
     Click the plus icon ("Create Vitural device"), the window to open click next to all , in this section system Image to choose "Tiramisu".
   You can flow the video:
   + [![Watch the video](https://cdn.pixabay.com/photo/2020/08/12/20/11/video-5483595_960_720.png)](https://youtu.be/aBTNUpp72ik?si=fmN_qZYZRIMyZLdA&t=77)
@@ -43,7 +43,8 @@ After install all requirement, open your terminal run "flutter doctor" to check 
 - Firstly, run your virtual device or unlock screen your mobile 
 
 - After open the source code and run "flutter pub get", you  can choose the mobile you want to install the application 
-![Screenshot 2024-04-23 at 12.08.02.png](..%2F..%2F..%2F..%2F..%2FDesktop%2FScreenshot%202024-04-23%20at%2012.08.02.png)
+<img width="392" alt="Screenshot 2024-04-23 at 12 08 02" src="https://github.com/KIddoKg/thesis_braintrainApp/assets/73632319/fd9be1ae-6cc1-4038-a21e-5d91ef16e7bb">
+
 Note!!!! don't run it with Chorme or Edge because application have api, so run on it the code with errors.
 - You can click run button play icon or open terminal run "flutter run" .Await about some minutes the BrainTrain will be install on your mobile
 
@@ -55,7 +56,8 @@ Video:
 ## Website doctor manager
 
 The same with run code application Brain train but when choose device run code, choose Chrome or Edge to run code.
-![Screenshot 2024-04-23 at 12.22.53.png](..%2F..%2F..%2F..%2F..%2FDesktop%2FScreenshot%202024-04-23%20at%2012.22.53.png)
+
+<img width="1575" alt="Screenshot 2024-04-23 at 12 22 53" src="https://github.com/KIddoKg/thesis_braintrainApp/assets/73632319/eb2d0c1b-ec84-4248-aa85-fc47ae5befd5">
 
 
 ## Edit code
@@ -64,13 +66,14 @@ If you want to run code with local:
 * With application:
 - When you run code BE and have your ip local BE. (http://localhost:8080)
 - Open file api in lib/service
-- Disable 2 line code above and open 2 line code below 
-![Screenshot 2024-04-23 at 12.30.37.png](..%2F..%2F..%2F..%2F..%2FDesktop%2FScreenshot%202024-04-23%20at%2012.30.37.png)
+- Disable 2 line code above and open 2 line code below
+  <img width="857" alt="Screenshot 2024-04-23 at 12 27 51" src="https://github.com/KIddoKg/thesis_braintrainApp/assets/73632319/35486ced-a470-466d-add8-1cea9457d8c2">
 
 * With website:
 - Open file api in lib/service
 - Disable 2 line code above and open 2 line code below
-  ![Screenshot 2024-04-23 at 12.38.26.png](..%2F..%2F..%2F..%2F..%2FDesktop%2FScreenshot%202024-04-23%20at%2012.38.26.png)
+  <img width="1098" alt="Screenshot 2024-04-23 at 12 30 37" src="https://github.com/KIddoKg/thesis_braintrainApp/assets/73632319/4180cc0f-0c27-4418-888b-42eb8940621c">
+
 
 If you want to run and using app and web in server: Open code and run it 
 
