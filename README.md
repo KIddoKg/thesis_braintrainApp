@@ -2,7 +2,7 @@
 
 BrainTrain - A system to improve language skill for mild cognitive impairment patients.
 
-Hello, my name is Nguyen Quoc Bảo - ITITIU19081. This is my theis for International University.
+Hello, my name is Nguyen Quoc Bao - ITITIU19081. This is my theis for International University.
 
 The purpose of this study is providing the overview of technology selections which help Alzheimer’s patients improve language skill and diagnose those who run the risk of MCI throughout data from games. It is the first time games have been designed by Vietnamese, so that they easily approach to the elderly in Vietnam. In addition, patients’ conditions are followed by specialist doctors based on data from the games which will be stored on server and the website for doctors. Specialist doctor can give many types of exercises for each patient, and then send notification to reminder patients.
 
