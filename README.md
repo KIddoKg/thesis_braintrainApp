@@ -33,6 +33,7 @@ flutter pub get
 - With run Android virtual device
   + Open the AndroidStudio at the first page to open project, click "tool" choose Device Manager:
   + <img width="297" alt="Screenshot 2024-04-23 at 10 02 29" src="https://github.com/KIddoKg/thesis_braintrainApp/assets/73632319/32dea05f-00ee-40de-b81f-0072a786d95c">
+  
     Click the plus icon ("Create Vitural device"), the window to open click next to all , in this section system Image to choose "Tiramisu".
   You can flow the video:
   + [![Watch the video](https://cdn.pixabay.com/photo/2020/08/12/20/11/video-5483595_960_720.png)](https://youtu.be/aBTNUpp72ik?si=fmN_qZYZRIMyZLdA&t=77)
