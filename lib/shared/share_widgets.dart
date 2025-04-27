@@ -5,6 +5,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:brain_train_app/shared/app_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
@@ -858,48 +859,52 @@ class UserRowText extends StatelessWidget {
     );
   }
 }
-
-Future<dynamic> showAlert(context, String title, String message,
-    {List<CupertinoButton>? actions,
-      List<ElevatedButton>? actionAndroids}) async {
-  if (Platform.isIOS) {
+Future<dynamic> showAlert(
+    BuildContext context,
+    String title,
+    String message, {
+      List<CupertinoButton>? actions,
+      List<ElevatedButton>? actionAndroids,
+    }) async {
+  // Check if the platform is iOS or Web
+  if (defaultTargetPlatform == TargetPlatform.iOS || kIsWeb) {
+    // Show Cupertino dialog for iOS and Web
     return showCupertinoDialog(
-        context: context!,
-        builder: (context) => CupertinoAlertDialog(
-          title: Text(title),
-          content: Text(message),
-          actions: [
-            if (actions != null)
-              ...actions
-            else
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: actions ??
+            [
               CupertinoButton(
-                  child: const Text('Đồng ý'),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  })
-          ],
-        ));
+                child: const Text('Đồng ý'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+      ),
+    );
   }
 
+  // Show AlertDialog for Android (and other non-web platforms)
   return showDialog(
     context: context,
     builder: (context) => AlertDialog(
       title: Text(title),
       content: Text(message),
-      actions: [
-        if (actionAndroids != null)
-          ...actionAndroids
-        else
-          ElevatedButton(
+      actions: actionAndroids ??
+          [
+            ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Đồng ý'))
-      ],
+              child: const Text('Đồng ý'),
+            ),
+          ],
     ),
   );
 }
-
 class DolDurmaClipper extends CustomClipper<Path> {
   final double holeRadius;
   final double right;

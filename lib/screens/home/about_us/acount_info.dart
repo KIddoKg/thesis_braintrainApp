@@ -959,9 +959,10 @@ class _AccountScreenState extends State<AccountScreen> {
   // }
 
   void logOut() async {
-    var res = await Services.instance.setContext(context).logout();
+    // var res = await Services.instance.setContext(context).logout();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (res.isSuccess) {
+   var res = true;
+    if (res == true) {
       await prefs.remove("lock");
       await prefs.remove("emoj");
       AppSetting.instance.reset();
