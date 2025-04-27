@@ -39,16 +39,7 @@ void main() async {
 
   // chạy ios thì mở cái này tắt cái trên
   await Firebase.initializeApp(
-      options: const FirebaseOptions(
-          apiKey: "AIzaSyB07CEMFi2T5BUX6ZGz9vedMQLWJLxh22E",
-          authDomain: "braintrain-62f15.firebaseapp.com",
-          databaseURL: "https://braintrain-62f15-default-rtdb.asia-southeast1.firebasedatabase.app",
-          projectId: "braintrain-62f15",
-          storageBucket: "braintrain-62f15.appspot.com",
-          messagingSenderId: "183795384114",
-          appId: "1:183795384114:web:c992615a6a70a3e4a9e12b",
-          measurementId: "G-3FF0RT1R87"
-      )
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService.initializeNotification();
@@ -213,7 +204,21 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return Consumer(builder: (context, ref, child) {
       return GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const HomeWrapper(),
+        home: FutureBuilder(
+          future: authStorage.getAccessToken(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              final accessToken = snapshot.data;
+              // decide which page to show based on the presence of the access token
+              if (accessToken != null && accessToken != "") {
+                return BottomNavBar(index: 1);
+              } else {
+                return const LoginScreen();
+              }
+            }
+            return const CircularProgressIndicator();
+          },
+        ),
         routes: RouteGenerator.routes,
         theme: ThemeData(
           primarySwatch: Colors.green,
