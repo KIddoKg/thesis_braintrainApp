@@ -29,7 +29,7 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-/lib/viewModel/data/
+/lib/viewModel/firebase_options.dart
 #/build/
 
 # Symbolication related
