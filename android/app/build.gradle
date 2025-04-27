@@ -1,3 +1,12 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+//    id "org.jetbrains.kotlin.android"
+    id "com.google.gms.google-services"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
@@ -22,46 +31,52 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'kotlin-android'
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
+
+
 android {
+    namespace "com.bmeit.brain_train_app"
     compileSdkVersion 34
-    ndkVersion flutter.ndkVersion
+//    ndkVersion flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    kotlinOptions {
-        jvmTarget = '1.8'
+    packagingOptions {
+        // Fixes duplicate libraries build issue,
+        // when your project uses more than one plugin that depend on C++ libs.
+        pickFirst 'lib/**/libc++_shared.so'
     }
 
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+//
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
-
     defaultConfig {
+        multiDexEnabled true
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.bmeit.brain_train_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 21
-        targetSdkVersion 34
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
-        multiDexEnabled true
+        minSdk = 23
+        targetSdk = 34
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+
     }
+
     signingConfigs {
         release {
             keyAlias keystoreProperties['keyAlias']
@@ -70,14 +85,39 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
-
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.release
         }
     }
+
+//    flavorDimensions "hkn_internal"
+//
+//    productFlavors {
+//        dev {
+//            dimension "hkn_internal"
+//            applicationIdSuffix ".dev"
+//            versionNameSuffix "Dev"
+//            resValue "string", "app_name", "hkn_internal Dev"
+//        }
+//        uat {
+//            dimension "hkn_internal"
+//            applicationIdSuffix ".uat"
+//            versionNameSuffix "Uat"
+//            resValue "string", "app_name", "hkn_internal Uat"
+//        }
+//        beta {
+//            dimension "hkn_internal"
+//            applicationIdSuffix ".beta"
+//            versionNameSuffix "Beta"
+//            resValue "string", "app_name", "hkn_internal Beta"
+//        }
+//        prod {
+//            dimension "hkn_internal"
+//            resValue "string", "app_name", "hkn_internal"
+//        }
+//    }
+
 }
 
 flutter {
@@ -85,7 +125,18 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7"
+    implementation "androidx.activity:activity:1.6.0-alpha05"
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'org.osmdroid:osmdroid-android:6.1.11'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation platform('com.google.firebase:firebase-bom:32.3.1')
+
+    // Firebase BOM (Quản lý version đồng bộ)
+    implementation platform('com.google.firebase:firebase-bom:33.8.0')
+
+    // Firebase Analytics (Bắt buộc để Firebase hoạt động)
+    implementation 'com.google.firebase:firebase-analytics'
+
+    // Firebase Cloud Messaging
+    implementation 'com.google.firebase:firebase-messaging'
 }

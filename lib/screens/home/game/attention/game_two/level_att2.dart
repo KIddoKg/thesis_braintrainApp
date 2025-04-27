@@ -21,7 +21,10 @@ class _LevelA2ScreenState extends State<LevelA2Screen> {
 
   setLevel() async {
     var res = await Services.instance.setContext(context).getDataPlayGameUser("PAIRING");
-    if (res!.isSuccess) {
+    if(res!.data == null){
+      return;
+    }
+    if (res.isSuccess) {
       if(res.data['level'] == 2){
         _isButtonEnabledM = true;
       }else if (res.data['level'] == 3) {

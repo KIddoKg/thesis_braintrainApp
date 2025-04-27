@@ -34,18 +34,22 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); // tạo app co Android thì chaạy cái nà
+  // await Firebase.initializeApp(); // tạo app co Android thì chaạy cái nà
 
 
   // chạy ios thì mở cái này tắt cái trên
-  // await Firebase.initializeApp(
-  //     options: const FirebaseOptions(
-  //         appId: '1:183795384114:ios:3f7b0a4cd338d57aa9e12b',
-  //         apiKey: 'AIzaSyAe4NPf0tJwOqmN5I3myhDf4YJu0bukIjs',
-  //         messagingSenderId: '183795384114',
-  //         projectId: 'braintrain-62f15',
-  //     )
-  // );
+  await Firebase.initializeApp(
+      options: const FirebaseOptions(
+          apiKey: "AIzaSyB07CEMFi2T5BUX6ZGz9vedMQLWJLxh22E",
+          authDomain: "braintrain-62f15.firebaseapp.com",
+          databaseURL: "https://braintrain-62f15-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "braintrain-62f15",
+          storageBucket: "braintrain-62f15.appspot.com",
+          messagingSenderId: "183795384114",
+          appId: "1:183795384114:web:c992615a6a70a3e4a9e12b",
+          measurementId: "G-3FF0RT1R87"
+      )
+  );
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService.initializeNotification();
   WidgetsFlutterBinding.ensureInitialized();
@@ -209,21 +213,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return Consumer(builder: (context, ref, child) {
       return GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: FutureBuilder(
-          future: authStorage.getAccessToken(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              final accessToken = snapshot.data;
-              // decide which page to show based on the presence of the access token
-              if (accessToken != null && accessToken != "") {
-                return BottomNavBar(index: 1);
-              } else {
-                return const LoginScreen();
-              }
-            }
-            return const CircularProgressIndicator();
-          },
-        ),
+        home: const HomeWrapper(),
         routes: RouteGenerator.routes,
         theme: ThemeData(
           primarySwatch: Colors.green,
@@ -243,5 +233,47 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ),
       );
     });
+  }
+}
+
+class HomeWrapper extends StatelessWidget {
+  const HomeWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final AuthStorage authStorage = AuthStorage();
+
+    return FutureBuilder(
+      future: authStorage.getAccessToken(),
+      builder: (context, snapshot) {
+        Widget child;
+        if (snapshot.connectionState == ConnectionState.done) {
+          final accessToken = snapshot.data;
+          if (accessToken != null && accessToken != "") {
+            child = BottomNavBar(index: 1);
+          } else {
+            child = const LoginScreen();
+          }
+        } else {
+          child = const Center(child: CircularProgressIndicator());
+        }
+
+        // Nếu web thì wrap lại
+        if (kIsWeb) {
+          return Center(
+            child: Container(
+              width: 430, // iPhone 14 Pro Max chiều rộng
+              height: 932, // iPhone 14 Pro Max chiều cao
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+              child: child,
+            ),
+          );
+        } else {
+          return child;
+        }
+      },
+    );
   }
 }

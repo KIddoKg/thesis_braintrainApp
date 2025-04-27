@@ -103,12 +103,18 @@ class _StatisticalPageState extends State<StatisticalPage> {
       enable: true,
       builder: (BuildContext context, TrackballDetails trackballDetails) {
         int? intValue;
-        if (trackballDetails.point!.yValue is int) {
-          intValue = trackballDetails.point!
-              .yValue; // If dynamicData is already an int, assign it directly
-        } else if (trackballDetails.point!.yValue is String) {
-          intValue = int.tryParse(trackballDetails.point!.yValue);
+
+        if (trackballDetails.point!.y is int) {
+          intValue = (trackballDetails.point!.y is int) as int?; // If it's already an int
+        } else if (trackballDetails.point!.y is String) {
+          intValue = int.tryParse(trackballDetails.point!.y as String);
         }
+
+        // Fallback if intValue is null
+        if (intValue == null) {
+          intValue = 0; // or you could show a different default value or message
+        }
+
         return Container(
           height: 50,
           width: 150,
@@ -119,36 +125,38 @@ class _StatisticalPageState extends State<StatisticalPage> {
           child: Row(
             children: [
               Center(
-                  child: SizedBox(
-                      height: 40,
-                      width: 150,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            !levelLg4 ? 'Điểm số' : 'Cấp',
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: trackballDetails.series!
-                                  .color, // Change the color to the desired color
-                            ),
-                          ),
-                          Text(
-                            ' : $intValue',
-                            style: const TextStyle(
-                              fontSize: 13,
-                              color: Color.fromRGBO(255, 255, 255, 1),
-                            ),
-                          ),
-                        ],
-                      )))
+                child: SizedBox(
+                  height: 40,
+                  width: 150,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        !levelLg4 ? 'Điểm số' : 'Cấp',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: trackballDetails.series!.color, // Color of the series
+                        ),
+                      ),
+                      Text(
+                        ' : $intValue',
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: Color.fromRGBO(255, 255, 255, 1),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         );
       },
       activationMode: ActivationMode.singleTap,
     );
+
     super.initState();
   }
 
@@ -288,7 +296,7 @@ class _StatisticalPageState extends State<StatisticalPage> {
     getDateBefore();
     loadingDataChart = true;
     var resBefore =
-        await Services.instance.setContext(context).getDataGameUser(filter: filterDataBefore);
+    await Services.instance.setContext(context).getDataGameUser(filter: filterDataBefore);
     if (resBefore != null) {
       var res = await Services.instance.getDataGameUser(filter: filter);
       loadingDataChart = false;
@@ -416,7 +424,7 @@ class _StatisticalPageState extends State<StatisticalPage> {
   }
   List<ExpenseData> getDataDealinWeeks() {
     var fromDateTime =
-        filterData['fromDate']; // Assuming you have this variable
+    filterData['fromDate']; // Assuming you have this variable
     var toDateTime = filterData['toDate']; // Assuming you have this variable
 
     DateTime fromDate = DateTime.fromMillisecondsSinceEpoch(fromDateTime);
@@ -490,7 +498,7 @@ class _StatisticalPageState extends State<StatisticalPage> {
 
   List<ExpenseData> getDataDealinMonths() {
     var fromDateTime =
-        filterData['fromDate']; // Assuming you have this variable
+    filterData['fromDate']; // Assuming you have this variable
     var toDateTime = filterData['toDate']; // Assuming you have this variable
 
     DateTime fromDate = DateTime.fromMillisecondsSinceEpoch(fromDateTime);
@@ -714,9 +722,9 @@ class _StatisticalPageState extends State<StatisticalPage> {
   String getNameGame(String gameName) {
     switch (gameName) {
       case 'POSITION' ||
-            'DIFFERENCE' ||
-            'STARTING_LETTER' ||
-            'SMALLER_EXPRESSION':
+      'DIFFERENCE' ||
+      'STARTING_LETTER' ||
+      'SMALLER_EXPRESSION':
         return 'Trò chơi 1';
       case 'NEW_PICTURE' || 'PAIRING' || 'STARTING_WORD' || 'SUM':
         return 'Trò chơi 2';
@@ -846,14 +854,14 @@ class _StatisticalPageState extends State<StatisticalPage> {
                                         backgroundColor: '#f7f7f7'.toColor(),
                                         child: Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                          CrossAxisAlignment.center,
                                           children: [
                                             Text(
                                               (filterData['fromDate'] as int)
                                                   .toDateString(
-                                                      format: 'dd/MM/yyyy'),
+                                                  format: 'dd/MM/yyyy'),
                                               textAlign: TextAlign.center,
                                               style: const TextStyle(
                                                   fontSize: 16,
@@ -877,14 +885,14 @@ class _StatisticalPageState extends State<StatisticalPage> {
                                         backgroundColor: '#f7f7f7'.toColor(),
                                         child: Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                          CrossAxisAlignment.center,
                                           children: [
                                             Text(
                                               (filterData['toDate'] as int)
                                                   .toDateString(
-                                                      format: 'dd/MM/yyyy'),
+                                                  format: 'dd/MM/yyyy'),
                                               style: const TextStyle(
                                                   fontSize: 16,
                                                   color: Colors.black54),
@@ -918,125 +926,117 @@ class _StatisticalPageState extends State<StatisticalPage> {
 
                       _game.isNotEmpty
                           ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(height: 10,),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0,bottom: 15),
+                            child: Text(!levelLg4
+                                ? 'Điểm số cao nhất'
+                                : 'Cấp độ cao nhất', style: const TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20),),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0,bottom: 10),
+                            child: Row(
+                              // crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const SizedBox(height: 10,),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8.0,bottom: 15),
-                                  child: Text(!levelLg4
-                                      ? 'Điểm số cao nhất'
-                                      : 'Cấp độ cao nhất', style: const TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 20),),
+                                Text(
+                                  "$nowMaxPoint",
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 22,
+                                    color: Colors.blue,
+                                  ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8.0,bottom: 10),
+                                const SizedBox(width: 50),
+                                Align(
+                                  alignment: Alignment.bottomCenter,
                                   child: Row(
-                                    // crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
+                                      (percent >= 0) ? const Icon(Icons.arrow_upward, size: 18, color: Colors.green) :const  Icon(Icons.arrow_downward_sharp, size: 18, color: Colors.red),
                                       Text(
-                                        "$nowMaxPoint",
-                                        style: const TextStyle(
+                                        "${(percent >= 0 ? (percent * 100) : (percent * -1 * 100)).toStringAsFixed(2)} % ",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
                                           fontWeight: FontWeight.w700,
-                                          fontSize: 22,
-                                          color: Colors.blue,
+                                          fontSize: 14,
+                                          color: percent >= 0 ? Colors.green : Colors.red,
                                         ),
                                       ),
-                                      const SizedBox(width: 50),
-                                      Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                          children: [
-                                            (percent >= 0) ? const Icon(Icons.arrow_upward, size: 18, color: Colors.green) :const  Icon(Icons.arrow_downward_sharp, size: 18, color: Colors.red),
-                                            Text(
-                                              "${(percent >= 0 ? (percent * 100) : (percent * -1 * 100)).toStringAsFixed(2)} % ",
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 14,
-                                                color: percent >= 0 ? Colors.green : Colors.red,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-
                                     ],
                                   ),
                                 ),
-                                Center(
-                                    child: SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height - 350,
 
-                                  // width:
-                                  // MediaQuery.of(context).size.width*2,
-                                  child: SfCartesianChart(
-
-                                    legend: const Legend(
-                                        isVisible: true,
-                                        position: LegendPosition.bottom),
-                                    tooltipBehavior: _tooltipBehavior,
-                                    // trackballBehavior: _trackballBehavior,
-                                    zoomPanBehavior: _zoomPanBehavior,
-                                    primaryYAxis: NumericAxis(
-    // anchorRangeToVisiblePoints: false,
-                                      // labelFormat: '{value} M',
-                                      numberFormat: NumberFormat.compact(),
-                                      minimum: 0,
-                                      // maximum: maxiChart +
-                                      //     maxiChart *
-                                      //         0.05,
-                                    ),
-                                    series: <ChartSeries>[
-                                      SplineSeries<ExpenseData, DateTime>(
-                                        color: Colors.blue,
-                                        splineType: SplineType.monotonic,
-                                        dataSource: _chartData,
-                                        xValueMapper: (ExpenseData exp, _) =>
-                                            exp.expenseCategory,
-                                        yValueMapper: (ExpenseData exp, _) =>
-                                            exp.total,
-                                        name: 'Số điểm đạt được cao nhất',
-    // dataLabelSettings: DataLabelSettings(isVisible: true),
-    // enableTooltip: true,
-                                        markerSettings: const MarkerSettings(
-                                          isVisible: true,
-                                        )
-                                      ),
-                                    ],
-                                    primaryXAxis: DateTimeAxis(
-                                        edgeLabelPlacement: EdgeLabelPlacement.shift,
-                                        dateFormat: checkMonth ? DateFormat.M() : DateFormat.d(),
-                                        intervalType: checkMonth ? DateTimeIntervalType.months: DateTimeIntervalType.days,
-                                        interactiveTooltip: const InteractiveTooltip(enable: false)),
-                                  ),
-                                )),
                               ],
-                            )
-                          : Center(
+                            ),
+                          ),
+                          Center(
                               child: SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.height - 150,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    loadingDataChart == true
-                                        ? LoadingDot()
-                                        : ErrorsNoti(
-                                            text:
-                                                "Không có dữ liệu \n trong thời gian này !",
-                                            style: const TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 20),
-                                          )
+                                MediaQuery.of(context).size.height - 350,
+
+                                // width:
+                                // MediaQuery.of(context).size.width*2,
+                                child:SfCartesianChart(
+                                  legend: const Legend(
+                                    isVisible: true,
+                                    position: LegendPosition.bottom,
+                                  ),
+                                  tooltipBehavior: _tooltipBehavior,
+                                  zoomPanBehavior: _zoomPanBehavior,
+                                  primaryYAxis: NumericAxis(
+                                    numberFormat: NumberFormat.compact(),
+                                    minimum: 0,
+                                  ),
+                                  series: <CartesianSeries>[
+                                    SplineSeries<ExpenseData, DateTime>(
+                                      color: Colors.blue,
+                                      splineType: SplineType.monotonic,
+                                      dataSource: _chartData,
+                                      xValueMapper: (ExpenseData exp, _) => exp.expenseCategory,
+                                      yValueMapper: (ExpenseData exp, _) => exp.total,
+                                      name: 'Số điểm đạt được cao nhất',
+                                      markerSettings: const MarkerSettings(
+                                        isVisible: true,
+                                      ),
+                                    ),
                                   ],
+                                  primaryXAxis: DateTimeAxis(
+                                    edgeLabelPlacement: EdgeLabelPlacement.shift,
+                                    dateFormat: checkMonth ? DateFormat.M() : DateFormat.d(),
+                                    intervalType: checkMonth ? DateTimeIntervalType.months : DateTimeIntervalType.days,
+                                    interactiveTooltip: const InteractiveTooltip(enable: false),
+                                  ),
                                 ),
-                              ),
-                            ),
+
+                              )),
+                        ],
+                      )
+                          : Center(
+                        child: SizedBox(
+                          height:
+                          MediaQuery.of(context).size.height - 150,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              loadingDataChart == true
+                                  ? LoadingDot()
+                                  : ErrorsNoti(
+                                text:
+                                "Không có dữ liệu \n trong thời gian này !",
+                                style: const TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 20),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
                       Center(
                         child: Container(
                           width: 242,
@@ -1283,7 +1283,7 @@ class _StatisticalPageState extends State<StatisticalPage> {
     gamePlaysInRange.sort((a, b) => b.score.compareTo(a.score));
 
     // if (pointNow != 0 && weeklyMaxData["T2"] != 0) {
-      difpoint = pointNow - weeklyMaxData["T2"]!;
+    difpoint = pointNow - weeklyMaxData["T2"]!;
     // }
     return showModalBottomSheet(
         isScrollControlled: true,
@@ -1292,185 +1292,186 @@ class _StatisticalPageState extends State<StatisticalPage> {
         // isScrollControlled: true,
         backgroundColor: Colors.transparent,
         builder: (context) => DraggableScrollableSheet(
-              initialChildSize: 0.4,
-              minChildSize: 0.2,
-              maxChildSize: 0.75,
-              expand: false,
-              builder: (_, controller) => Container(
-                height: MediaQuery.of(context).size.height * 0.75,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius:   BorderRadius.only(
-                    topLeft: Radius.circular(25.0),
-                    topRight: Radius.circular(25.0),
+          initialChildSize: 0.4,
+          minChildSize: 0.2,
+          maxChildSize: 0.75,
+          expand: false,
+          builder: (_, controller) => Container(
+            height: MediaQuery.of(context).size.height * 0.75,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius:   BorderRadius.only(
+                topLeft: Radius.circular(25.0),
+                topRight: Radius.circular(25.0),
+              ),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: 60, // Độ rộng của hình chữ nhật
+                    height: 10, // Chiều cao của hình chữ nhật
+                    decoration: BoxDecoration(
+                      color: Colors.grey, // Màu nền của hình chữ nhật
+                      borderRadius:
+                      BorderRadius.circular(20), // Bán kính bo tròn
+                    ),
                   ),
                 ),
-                child: Column(
+                Wrap(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: 60, // Độ rộng của hình chữ nhật
-                        height: 10, // Chiều cao của hình chữ nhật
-                        decoration: BoxDecoration(
-                          color: Colors.grey, // Màu nền của hình chữ nhật
-                          borderRadius:
-                              BorderRadius.circular(20), // Bán kính bo tròn
+                      padding: const EdgeInsets.all(15.0),
+                      child: Center(
+                        child: Text(
+                          "${getNameGame(gameName)} ${getTypeGame(gameType)}",
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 20),
                         ),
                       ),
                     ),
-                    Wrap(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Center(
-                            child: Text(
-                              "${getNameGame(gameName)} ${getTypeGame(gameType)}",
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.w500, fontSize: 20),
-                            ),
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(15.0),
-                        ),
-                      ],
-                    ),
-                    Expanded(
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height,
-                        width: MediaQuery.of(context).size.width,
-                        child: SingleChildScrollView(
-                            // physics: NeverScrollableScrollPhysics(),
-                            // shrinkWrap: true,
-                            controller: controller,
-                            child: Column(
-                              children: [
-                                Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Center(
-                                      child: RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text:
-                                                  "Điểm trò chơi ${getNameGame(gameName) }trong ${getTypeGame(gameType)} của bạn đã ",
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 15,
-                                                  color: Colors.black),
-                                            ),
-                                            TextSpan(
-                                              text: difpoint < 0
-                                                  ? "Giảm $difpoint điểm"
-                                                  : "Tăng $difpoint điểm",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 15,
-                                                  color: difpoint < 0
-                                                      ? Colors.red
-                                                      : Colors.green),
-                                            ),
-                                            const TextSpan(
-                                              text: " so với lúc đầu tuần",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 15,
-                                                  color: Colors.black),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    )),
-                                Center(
-                                    child: SfCartesianChart(
-                                      title: ChartTitle(
-                                          text:
-                                              'Tổng số lần chơi ${gamePlaysInRange.length}'),
-                                      legend: const Legend(
-                                          isVisible: true,
-                                          position: LegendPosition.bottom),
-                                      tooltipBehavior: _tooltipBehavior,
-                                      series: <ChartSeries>[
-                                        ColumnSeries<Date, String>(
-                                            color: Colors.blue,
-                                            dataSource: chartData,
-                                            dashArray: <double>[5, 5],
-                                            xValueMapper: (Date exp, _) =>
-                                                exp.time,
-                                            yValueMapper: (Date exp, _) =>
-                                                exp.total,
-                                            name: 'Số điểm đạt được cao nhất',
-                                            markerSettings: const MarkerSettings(
-                                              isVisible: true,
-                                            )),
-                                      ],
-                                      primaryXAxis: CategoryAxis(),
-                                    )),
-                                Divider(
-                                  thickness: 1.0,
-                                  color: Colors.grey[300],
-                                ),
-                                gamePlaysInRange.isNotEmpty
-                                    ? Center(
-                                        child: DataTable(
-                                          columns: const [
-                                            DataColumn(label: Text('Hạng')),
-                                            DataColumn(label: Text('Ngày')),
-                                            DataColumn(label: Text('Điểm')),
-                                          ],
-                                          rows: gamePlaysInRange
-                                              .take(20)
-                                              .map((data) {
-                                            final rank = gamePlaysInRange
-                                                    .indexOf(data) +
-                                                1; // Xếp hạng dựa trên vị trí trong danh sách
-
-                                            Widget rankWidget;
-                                            if (rank == 1) {
-                                              rankWidget = const Icon(Icons.star,
-                                                  color: Colors.yellow);
-                                            } else {
-                                              rankWidget =
-                                                  Text(rank.toString());
-                                            }
-
-                                            return DataRow(cells: [
-                                              DataCell(rankWidget),
-                                              DataCell(Text(data.createdDate
-                                                  .toDateString())),
-                                              gameName != 'LETTERS_REARRANGE'
-                                                  ? DataCell(Text(
-                                                      data.score.toString()))
-                                                  : DataCell(Text(
-                                                      data.maxLevel.toString()))
-                                            ]);
-                                          }).toList(),
-                                        ),
-                                      )
-                                    : ErrorsNoti(
-                                        text:
-                                            "Bạn chưa chơi game \n nào trong tuần này !",
-                                        style: const TextStyle(
-                                            color: Colors.black54,
-                                            fontSize: 17),
-                                      )
-                              ],
-                            )),
-                      ),
+                    const Padding(
+                      padding: EdgeInsets.all(15.0),
                     ),
                   ],
                 ),
-              ),
-            ));
+                Expanded(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    child: SingleChildScrollView(
+                      // physics: NeverScrollableScrollPhysics(),
+                      // shrinkWrap: true,
+                        controller: controller,
+                        child: Column(
+                          children: [
+                            Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Center(
+                                  child: RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text:
+                                          "Điểm trò chơi ${getNameGame(gameName) }trong ${getTypeGame(gameType)} của bạn đã ",
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 15,
+                                              color: Colors.black),
+                                        ),
+                                        TextSpan(
+                                          text: difpoint < 0
+                                              ? "Giảm $difpoint điểm"
+                                              : "Tăng $difpoint điểm",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 15,
+                                              color: difpoint < 0
+                                                  ? Colors.red
+                                                  : Colors.green),
+                                        ),
+                                        const TextSpan(
+                                          text: " so với lúc đầu tuần",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 15,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )),
+                            Center(
+                                child: SfCartesianChart(
+                                  title: ChartTitle(
+                                    text: 'Tổng số lần chơi ${gamePlaysInRange.length}',
+                                  ),
+                                  legend: const Legend(
+                                    isVisible: true,
+                                    position: LegendPosition.bottom,
+                                  ),
+                                  tooltipBehavior: _tooltipBehavior,
+                                  series: <CartesianSeries>[
+                                    ColumnSeries<Date, String>(
+                                      color: Colors.blue,
+                                      dataSource: chartData,
+                                      dashArray: <double>[5, 5],
+                                      xValueMapper: (Date exp, _) => exp.time,
+                                      yValueMapper: (Date exp, _) => exp.total,
+                                      name: 'Số điểm đạt được cao nhất',
+                                      markerSettings: const MarkerSettings(
+                                        isVisible: true,
+                                      ),
+                                    ),
+                                  ],
+                                  primaryXAxis: CategoryAxis(),
+                                )
+                            ),
+                            Divider(
+                              thickness: 1.0,
+                              color: Colors.grey[300],
+                            ),
+                            gamePlaysInRange.isNotEmpty
+                                ? Center(
+                              child: DataTable(
+                                columns: const [
+                                  DataColumn(label: Text('Hạng')),
+                                  DataColumn(label: Text('Ngày')),
+                                  DataColumn(label: Text('Điểm')),
+                                ],
+                                rows: gamePlaysInRange
+                                    .take(20)
+                                    .map((data) {
+                                  final rank = gamePlaysInRange
+                                      .indexOf(data) +
+                                      1; // Xếp hạng dựa trên vị trí trong danh sách
+
+                                  Widget rankWidget;
+                                  if (rank == 1) {
+                                    rankWidget = const Icon(Icons.star,
+                                        color: Colors.yellow);
+                                  } else {
+                                    rankWidget =
+                                        Text(rank.toString());
+                                  }
+
+                                  return DataRow(cells: [
+                                    DataCell(rankWidget),
+                                    DataCell(Text(data.createdDate
+                                        .toDateString())),
+                                    gameName != 'LETTERS_REARRANGE'
+                                        ? DataCell(Text(
+                                        data.score.toString()))
+                                        : DataCell(Text(
+                                        data.maxLevel.toString()))
+                                  ]);
+                                }).toList(),
+                              ),
+                            )
+                                : ErrorsNoti(
+                              text:
+                              "Bạn chưa chơi game \n nào trong tuần này !",
+                              style: const TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 17),
+                            )
+                          ],
+                        )),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 }
 
 class ChartData {
   ChartData(
-    this.x,
-    this.series0,
-  );
+      this.x,
+      this.series0,
+      );
 
   final DateTime x;
   final double series0;

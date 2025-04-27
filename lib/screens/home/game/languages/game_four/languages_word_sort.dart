@@ -87,6 +87,7 @@ class _WordFindState extends State<WordFind> {
   Future<void> initData() async {
     print("djkashdksjahdkajhdkjahdkjashk");
     List<String> jsonLista = await dataFrist();
+    print(jsonLista.last);
 
     for (final word in jsonLista) {
       final words = word.split(' ');
@@ -354,50 +355,50 @@ class _WordFindWidgetState extends State<WordFindWidget> {
   final List<ExplanationData> data = [
     ExplanationData(
       description:
-          "Nhấn vào các ô chữ bên dưới, sau đó chữ sẽ hiện lên các ô ở trên",
+      "Nhấn vào các ô chữ bên dưới, sau đó chữ sẽ hiện lên các ô ở trên",
       title: "Trò chơi Sắp xếp từ",
       localImageSrc:
-          "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2RjZWY5NTlkNTMzZTg3NDkwMWNhMjI3MDY5ZWVmYzhjMGUzOTY5ZiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/cP2hBBRNjtVSEzXBXt/giphy.gif",
+      "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2RjZWY5NTlkNTMzZTg3NDkwMWNhMjI3MDY5ZWVmYzhjMGUzOTY5ZiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/cP2hBBRNjtVSEzXBXt/giphy.gif",
       backgroundColor: AppColors.primaryColor,
     ),
     ExplanationData(
       description:
-          "Nếu ấn sai có thể nhấn vào chữ bên trên để chữ có thể trở về vị trí cũ",
+      "Nếu ấn sai có thể nhấn vào chữ bên trên để chữ có thể trở về vị trí cũ",
       title: "Trò chơi Sắp xếp từ",
       localImageSrc:
-          "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExODM3ZDNmZjRmMDM2NTEzZWE0OWM3MjU1NmYzMTI0M2ZhNWEzODVlOCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/wiIkCCZr4I2ApJd6ZT/giphy.gif",
+      "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExODM3ZDNmZjRmMDM2NTEzZWE0OWM3MjU1NmYzMTI0M2ZhNWEzODVlOCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/wiIkCCZr4I2ApJd6ZT/giphy.gif",
       backgroundColor: AppColors.primaryColor,
     ),
     ExplanationData(
       description:
-          "Sau khi lấp đầy ô chữ, nếu sai các ô sẽ hiện màu đỏ. Có thể bấm vào biểu tượng 2 mũi tên để reset nhanh",
+      "Sau khi lấp đầy ô chữ, nếu sai các ô sẽ hiện màu đỏ. Có thể bấm vào biểu tượng 2 mũi tên để reset nhanh",
       title: "Trò chơi Sắp xếp từ",
       localImageSrc:
-          "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjk3OTU2NjA1MmNhZTRhYWJmOTNjOGVjODgwYjg5YWUyMDgyNjA4MyZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/hsKxF3mYkU5WI5B1mQ/giphy.gif",
+      "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjk3OTU2NjA1MmNhZTRhYWJmOTNjOGVjODgwYjg5YWUyMDgyNjA4MyZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/hsKxF3mYkU5WI5B1mQ/giphy.gif",
       backgroundColor: AppColors.primaryColor,
     ),
     ExplanationData(
       description:
-          "Nếu quá khó, có thể nhấn vào biểu tượng bóng đèn. Các chữ cái được gợi ý sẽ có màu xanh",
+      "Nếu quá khó, có thể nhấn vào biểu tượng bóng đèn. Các chữ cái được gợi ý sẽ có màu xanh",
       title: "Trò chơi Sắp xếp từ",
       localImageSrc:
-          "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWE3MmZlMjEwZmJiN2QzYzdjN2Q5MjVmMjZmOTkwNTYyOWMwMmI4ZSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/aM4Ry9mjEpqBTAArY3/giphy.gif",
+      "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWE3MmZlMjEwZmJiN2QzYzdjN2Q5MjVmMjZmOTkwNTYyOWMwMmI4ZSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/aM4Ry9mjEpqBTAArY3/giphy.gif",
       backgroundColor: AppColors.primaryColor,
     ),
     ExplanationData(
       description:
-          "Sau khi hoàn thành đúng chữ cái, các ô sẽ hiện màu xanh và tự sang màn",
+      "Sau khi hoàn thành đúng chữ cái, các ô sẽ hiện màu xanh và tự sang màn",
       title: "Trò chơi Sắp xếp từ",
       localImageSrc:
-          "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTBkOTU0OTdjNWY0MTE1YWMyZTBhOWIwMDQwMDkxYjAyODkyMmFlMiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/b8HWCPbXJgNOKvzbtk/giphy.gif",
+      "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTBkOTU0OTdjNWY0MTE1YWMyZTBhOWIwMDQwMDkxYjAyODkyMmFlMiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/b8HWCPbXJgNOKvzbtk/giphy.gif",
       backgroundColor: AppColors.primaryColor,
     ),
     ExplanationData(
       description:
-          "Nếu muốn chơi lại các câu trước, có thể bấm vào nút '<' để trở lại câu trước",
+      "Nếu muốn chơi lại các câu trước, có thể bấm vào nút '<' để trở lại câu trước",
       title: "Trò chơi Sắp xếp từ",
       localImageSrc:
-          "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTYzOWQyN2ZlYWFjMWQyMTZhMzc2YTRjOWU0Y2RkOGU2NTZmNDk3ZSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/V4JeDOpRXt6ZKhkYGN/giphy.gif",
+      "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTYzOWQyN2ZlYWFjMWQyMTZhMzc2YTRjOWU0Y2RkOGU2NTZmNDk3ZSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/V4JeDOpRXt6ZKhkYGN/giphy.gif",
       backgroundColor: AppColors.primaryColor,
     ),
   ];
@@ -409,8 +410,8 @@ class _WordFindWidgetState extends State<WordFindWidget> {
       context,
       MaterialPageRoute(
           builder: (context) => OnBoarding(
-                data: data,
-              )),
+            data: data,
+          )),
     );
 
     // When a BuildContext is used from a StatefulWidget, the mounted property
@@ -560,7 +561,7 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                             children: [
                               Column(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
@@ -571,7 +572,7 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                         //SizedBox(height: AppColors.bottomArea),
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                           children: [
                                             Row(
                                               children: [
@@ -628,22 +629,22 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                           decoration: BoxDecoration(
                                             color: LightColors.kLightYellow,
                                             borderRadius:
-                                                BorderRadius.circular(12),
+                                            BorderRadius.circular(12),
                                           ),
                                           child: SingleChildScrollView(
                                             child: Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              CrossAxisAlignment.center,
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                              MainAxisAlignment.start,
                                               children: [
                                                 Container(
                                                   padding:
-                                                      const EdgeInsets.all(10),
+                                                  const EdgeInsets.all(10),
                                                   child: Row(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                     children: [
                                                       Row(
                                                         children: [
@@ -653,26 +654,26 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                                 onTap:
                                                                     () async {
                                                                   if (count2 >
-                                                                          1 &&
+                                                                      1 &&
                                                                       timeHint ==
                                                                           true) {
                                                                     currentQues
-                                                                            .isDone =
-                                                                        false;
+                                                                        .isDone =
+                                                                    false;
                                                                     for (var i =
-                                                                            0;
-                                                                        i < 4;
-                                                                        i++) {
+                                                                    0;
+                                                                    i < 4;
+                                                                    i++) {
                                                                       generatePuzzle(
                                                                           next:
-                                                                              true);
+                                                                          true);
                                                                     }
                                                                     generateHint();
                                                                     timeHint =
-                                                                        false;
+                                                                    false;
                                                                     currentQues
-                                                                            .isFull =
-                                                                        false;
+                                                                        .isFull =
+                                                                    false;
                                                                   }
 
                                                                 },
@@ -681,19 +682,19 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                                       .tungsten_outlined,
                                                                   size: 45,
                                                                   color:
-                                                                      ColorsHint,
+                                                                  ColorsHint,
                                                                 ),
                                                               ),
                                                               _counter != 0
                                                                   ? Text(
-                                                                      "$_counter",
-                                                                      style: const TextStyle(
-                                                                          color:
-                                                                              Colors.black),
-                                                                    )
+                                                                "$_counter",
+                                                                style: const TextStyle(
+                                                                    color:
+                                                                    Colors.black),
+                                                              )
                                                                   : const SizedBox(
-                                                                      height:
-                                                                          10)
+                                                                  height:
+                                                                  10)
                                                             ],
                                                           ),
                                                           Column(
@@ -701,15 +702,15 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                               InkWell(
                                                                 onTap: () {
                                                                   if (resetcount ==
-                                                                          true &&
+                                                                      true &&
                                                                       indexQues <
                                                                           best) {
                                                                     currentQues
-                                                                            .isDone =
-                                                                        false;
+                                                                        .isDone =
+                                                                    false;
                                                                     generatePuzzle(
                                                                         next:
-                                                                            true);
+                                                                        true);
                                                                     // for (var i = 0;
                                                                     // i < 4;
                                                                     // i++) {
@@ -719,16 +720,16 @@ class _WordFindWidgetState extends State<WordFindWidget> {
 
                                                                     startTimer();
                                                                     currentQues
-                                                                            .isFull =
-                                                                        false;
+                                                                        .isFull =
+                                                                    false;
 
                                                                     setState(
-                                                                        () {
-                                                                      resetcount =
+                                                                            () {
+                                                                          resetcount =
                                                                           false;
-                                                                      resetHint =
+                                                                          resetHint =
                                                                           true;
-                                                                    });
+                                                                        });
                                                                   }
                                                                 },
                                                                 child: Icon(
@@ -736,7 +737,7 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                                       .sync_outlined,
                                                                   size: 45,
                                                                   color:
-                                                                      ColorsReset,
+                                                                  ColorsReset,
                                                                 ),
                                                               ),
                                                               const SizedBox(
@@ -758,7 +759,7 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                                       0) {
                                                                     generatePuzzle(
                                                                         left:
-                                                                            true);
+                                                                        true);
 
                                                                     generateHintAll();
                                                                   }
@@ -768,7 +769,7 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                                       .arrow_back_ios,
                                                                   size: 45,
                                                                   color:
-                                                                      ColorsBack,
+                                                                  ColorsBack,
                                                                 ),
                                                               ),
                                                               const SizedBox(
@@ -783,12 +784,12 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                                   _timer
                                                                       .cancel();
                                                                   if (currentQues
-                                                                          .isDone ==
+                                                                      .isDone ==
                                                                       true) {
                                                                     startTimer();
                                                                     generatePuzzle(
                                                                         next:
-                                                                            true);
+                                                                        true);
                                                                   }
                                                                 },
                                                                 child: Icon(
@@ -796,7 +797,7 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                                       .arrow_forward_ios,
                                                                   size: 45,
                                                                   color:
-                                                                      ColorsNext,
+                                                                  ColorsNext,
                                                                 ),
                                                               ),
                                                               const SizedBox(
@@ -815,7 +816,7 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                     fontSize: 20,
                                                     color: Colors.black,
                                                     fontWeight:
-                                                        FontWeight.bold,
+                                                    FontWeight.bold,
                                                   ),
                                                 ),
                                                 Container(
@@ -830,7 +831,7 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                       fontSize: 20,
                                                       color: Colors.black,
                                                       fontWeight:
-                                                          FontWeight.bold,
+                                                      FontWeight.bold,
                                                     ),
                                                   ),
                                                 ),
@@ -844,13 +845,13 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                         (context, constraints) {
                                                       return Row(
                                                         crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
+                                                        CrossAxisAlignment
+                                                            .center,
                                                         mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                         mainAxisSize:
-                                                            MainAxisSize.max,
+                                                        MainAxisSize.max,
                                                         children: currentQues
                                                             .puzzles
                                                             .map((puzzle) {
@@ -876,14 +877,14 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                           return InkWell(
                                                             onTap: () {
                                                               if (puzzle
-                                                                      .hintShow ||
+                                                                  .hintShow ||
                                                                   currentQues
                                                                       .isDone) {
                                                                 return;
                                                               }
                                                               currentQues
-                                                                      .isFull =
-                                                                  false;
+                                                                  .isFull =
+                                                              false;
                                                               // currentQues.isDone = false;
                                                               puzzle
                                                                   .clearValue();
@@ -891,24 +892,24 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                             },
                                                             child: Container(
                                                               alignment:
-                                                                  Alignment
-                                                                      .center,
+                                                              Alignment
+                                                                  .center,
                                                               decoration:
-                                                                  BoxDecoration(
+                                                              BoxDecoration(
                                                                 color: color,
                                                                 borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10),
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    10),
                                                               ),
                                                               width: constraints
-                                                                          .biggest
-                                                                          .width /
-                                                                      test -
+                                                                  .biggest
+                                                                  .width /
+                                                                  test -
                                                                   6,
                                                               height: constraints
-                                                                      .biggest
-                                                                      .width /
+                                                                  .biggest
+                                                                  .width /
                                                                   8,
                                                               margin: const EdgeInsets
                                                                   .all(3),
@@ -919,8 +920,8 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                                 const TextStyle(
                                                                   fontSize: 25,
                                                                   fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                                  FontWeight
+                                                                      .bold,
                                                                 ),
                                                               ),
                                                             ),
@@ -999,7 +1000,7 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                             alignment: Alignment.center,
                             child: GridView.builder(
                               gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                                 childAspectRatio: 1,
                                 crossAxisCount: 5,
                                 crossAxisSpacing: 1,
@@ -1010,14 +1011,14 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                               itemBuilder: (context, index) {
                                 bool statusBtn = currentQues.puzzles.indexWhere(
                                         (puzzle) =>
-                                            puzzle.currentIndex == index) >=
+                                    puzzle.currentIndex == index) >=
                                     0;
 
                                 return LayoutBuilder(
                                   builder: (context, constraints) {
                                     Color? color = statusBtn
-                                        // ? Color(0xFFFFD600)
-                                        // : Color(0xFFFFFD9D);
+                                    // ? Color(0xFFFFD600)
+                                    // : Color(0xFFFFFD9D);
                                         ? const Color(0xFFFFF9EC)
                                         : const Color(0xFFFFFD9D);
                                     Color ColorsRemove;
@@ -1246,12 +1247,12 @@ class _WordFindWidgetState extends State<WordFindWidget> {
     WordFindQues currentQues = listQuestions[indexQues];
 
     int currentIndexEmpty =
-        currentQues.puzzles.indexWhere((puzzle) => puzzle.currentValue == null);
+    currentQues.puzzles.indexWhere((puzzle) => puzzle.currentValue == null);
 
     if (currentIndexEmpty >= 0) {
       currentQues.puzzles[currentIndexEmpty].currentIndex = index;
       currentQues.puzzles[currentIndexEmpty].currentValue =
-          currentQues.arrayBtns[index];
+      currentQues.arrayBtns[index];
 
       if (await currentQues.fieldCompleteCorrect()) {
         currentQues.isDone = true;
@@ -1310,7 +1311,7 @@ class WordFindQues {
     // if already complete, check correct or not
 
     String answeredString =
-        puzzles.map((puzzle) => puzzle.currentValue).join("");
+    puzzles.map((puzzle) => puzzle.currentValue).join("");
     // if same string, answer is correct..yeay
 
     return answeredString == answer;

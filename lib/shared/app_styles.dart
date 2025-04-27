@@ -1,10 +1,8 @@
-import 'dart:io';
-
-import 'package:brain_train_app/helper/formater.dart';
-import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform, TargetPlatform;
 import 'package:flutter/material.dart';
-
+import 'package:brain_train_app/helper/formater.dart';
 import 'size_configs.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 const Color kPrimaryColor = Color(0xffFC9D45);
 const Color kSecondaryColor = Color(0xff573353);
@@ -20,55 +18,74 @@ class AppColors {
   static const Color text = Color(0XFF06152B);
   static const Color textLight = Color(0XFF99B2C6);
   static const Color neutral = Color(0XFFFFFFFF);
+
   static Color primaryColor = '#B5CB99'.toColor();
   static Color primaryColorWord = '#B5CB99'.toColor();
   static Color primaryColorPink = '#B2533E'.toColor();
-  static Color primaryColorYellowW= '#F5EEC8'.toColor();
-  static Color primaryColorBlack= '#555843'.toColor();
+  static Color primaryColorYellowW = '#F5EEC8'.toColor();
+  static Color primaryColorBlack = '#555843'.toColor();
   static Color primaryColorGreen = '#186F65'.toColor();
   static Color primaryColorYellow = '#FCE09B'.toColor();
   static Color primaryColorGreenPer = '#A7D397'.toColor();
   static Color primaryColorGrey = '#D0D4CA'.toColor();
-  // static Color primaryColor = '#025ca6'.toColor();
-  static const Color bgButton = Color.fromRGBO(	209, 209, 209, 1.0);
 
+  static const Color bgButton = Color.fromRGBO(209, 209, 209, 1.0);
 
   static double? sizeUI;
   static double? bottomNav;
   static double? bottomArea;
 
   static void init() {
-    if (Platform.isIOS) {
-      sizeUI = 255;
-      bottomArea = 40;
-      bottomNav = 0;
-    } else if (Platform.isAndroid) {
+    if (kIsWeb) {
+      // Web platform
       sizeUI = 260;
       bottomNav = 18;
       bottomArea = 0;
+    } else {
+      if (defaultTargetPlatform == TargetPlatform.iOS) {
+        sizeUI = 255;
+        bottomArea = 40;
+        bottomNav = 0;
+      } else if (defaultTargetPlatform == TargetPlatform.android) {
+        sizeUI = 260;
+        bottomNav = 18;
+        bottomArea = 0;
+      } else {
+        sizeUI = 260;
+        bottomNav = 18;
+        bottomArea = 0;
+      }
     }
   }
-// static const Color bgButton = Color.fromRGBO(	204, 204, 204, 1.0);
 }
-Future<String> getDeviceType() async {
-  String deviceType = "Unknown";
-  final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
-  if (Platform.isIOS) {
-    try {
-      IosDeviceInfo iosInfo = await deviceInfoPlugin.iosInfo;
+Future<String> getDeviceType() async {
+  if (kIsWeb) {
+    return "Web";
+  }
+
+  String deviceType = "Unknown";
+  final deviceInfoPlugin = DeviceInfoPlugin();
+
+  try {
+    if (defaultTargetPlatform == TargetPlatform.iOS) {
+      final iosInfo = await deviceInfoPlugin.iosInfo;
       if (iosInfo.model.contains('iPad')) {
         deviceType = "iPad";
       } else if (iosInfo.model.contains('iPhone')) {
         deviceType = "iPhone";
       }
-    } catch (e) {
-      print("Error getting iOS device information: $e");
+    } else if (defaultTargetPlatform == TargetPlatform.android) {
+      final androidInfo = await deviceInfoPlugin.androidInfo;
+      deviceType = androidInfo.model ?? "Android Device";
     }
+  } catch (e) {
+    print("Error getting device information: $e");
   }
 
   return deviceType;
 }
+
 final kTitle = TextStyle(
   fontSize: SizeConfig.blockSizeH! * 7,
   color: kSecondaryColor,
@@ -92,9 +109,10 @@ final kBodyText2 = TextStyle(
 );
 
 final kBodyText3 = TextStyle(
-    color: kSecondaryColor,
-    fontSize: SizeConfig.blockSizeH! * 3.8,
-    fontWeight: FontWeight.normal);
+  color: kSecondaryColor,
+  fontSize: SizeConfig.blockSizeH! * 3.8,
+  fontWeight: FontWeight.normal,
+);
 
 final kInputBorder = OutlineInputBorder(
   borderRadius: BorderRadius.circular(12),

@@ -261,7 +261,7 @@ class NotificationService {
       actionButtons: actionButtons,
       schedule: scheduled
           ? NotificationInterval(
-              interval: interval,
+              interval: Duration(milliseconds: 1000),
               timeZone:
                   await AwesomeNotifications().getLocalTimeZoneIdentifier(),
               preciseAlarm: true,

@@ -4,12 +4,12 @@ import 'package:brain_train_app/models/user_model.dart';
 import 'dio_helper.dart';
 
 class API {
-  static String identity = 'http://45.117.177.103:8080/api';
-  static String auth = 'http://45.117.177.103:8080/api/auth';
+  static String identity = 'https://braintrain-server.aiotlab.io.vn/api';
+  static String auth = 'https://braintrain-server.aiotlab.io.vn/api/auth';
   // static String identity = 'http://localhost:8080/api'; //thay đổi nó khi muốn chạy local
   // static String auth = 'http://localhost:8080/api/auth'; //thay đổi nó khi muốn chạy local
 
-
+//https://braintrain-server.aiotlab.io.vn/api/admin/login
 
   static Dio dio = Dio();
 

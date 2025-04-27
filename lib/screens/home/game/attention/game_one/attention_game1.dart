@@ -34,13 +34,14 @@ class Result {
   final int score;
   final int time;
 
+
   Result(this.bonus, this.score, this.time);
 }
 
 class ImagePass {
   // final int score;
   final String score;
-  final List<String> message;
+  final List message;
 
   ImagePass(this.score, this.message);
 }
@@ -61,11 +62,11 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
   Timer? totalCountdownTimer;
   Duration totalDuration = const Duration();
   int reduceSecondsBy = 1;
-  List<String> imagesAssetPath = [];
-  List<String> solutionAssetPath = [];
-  List<String> solutionAssetPathUsed = [];
-  List<String> imagesAssetPathUsed = [];
-  List gameData = [];
+  // List<String> imagesAssetPath = [];
+  // List<String> solutionAssetPath = [];
+  // List<String> solutionAssetPathUsed = [];
+  // List<String> imagesAssetPathUsed = [];
+  List gameData =[];
   late int currentKey; // ID of image key
   int time = 1;
   int time2 = 1;
@@ -80,6 +81,40 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
   late CustomDialog dialog;
   int countQuestion = 0;
 
+  List imgUserPass = [];
+
+  void findAndRemoveItemsByKeys(List<String> keys, {bool delete = true}) {
+    if (keys.isEmpty) {
+      print("No keys to process");
+      return;
+    }
+
+    for (var key in keys) {
+      // Chuyển key thành int nếu cần
+
+
+      // Tìm và xóa mục có key tương ứng
+      var itemToAdd = gameData.firstWhere(
+            (item) => item['key'] == key,  // So sánh key trong gameData
+        orElse: () => null,
+      );
+
+      if (itemToAdd != null) {
+        imgUserPass.add(itemToAdd);
+        if(delete) {
+          gameData.remove(itemToAdd);
+        }
+        print("Found and added item with key $key: $itemToAdd");
+      } else {
+        print("No item found with key $key");
+      }
+    }
+    setState(() {
+
+    });
+  }
+
+
 //! save daily workout of game math
   Future<void> _saveDailyAtte() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -87,33 +122,25 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
     await prefs.setInt("date", DateTime.now().millisecondsSinceEpoch);
   }
 
-  setImageUsed() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      imagesAssetPathUsed = prefs.getStringList("imageUsedAttendtion1") ?? [];
-      solutionAssetPathUsed =
-          prefs.getStringList("imageSolutionAttendtion1") ?? [];
-      //print(solutionAssetPathUsed);
-    });
-  }
-
   Future<void> setStartImg() async {
-    List<String> saveSetImg;
+
     var res = await Services.instance
         .setContext(context)
         .getDataPlayGameUser("DIFFERENCE");
     if (res!.isSuccess) {
-      String numbers = res.data['wordList'] ?? "";
-      List<String> numbersList = numbers.split(', ');
-      List<String> imagePathList = numbersList
-          .map((number) => 'assets/images/Attention/Solution/$number.png')
-          .toList();
-      solutionAssetPathUsed = imagePathList;
-    } else {
-      solutionAssetPathUsed = [];
+      String numbers = res.data != null ? res.data['wordList'] ?? "" : "";
+
+      if (numbers.isNotEmpty) {
+        List<String> numbersList = numbers.split(',').map((item) => item.trim()).toList();
+
+        findAndRemoveItemsByKeys(numbersList);
+      } else {
+        print("No valid keys provided");
+      }
     }
+
     setState(() {});
-    //print(solutionAssetPathUsed);
+
   }
 
   Future<void> setStaryPlay() async {
@@ -149,7 +176,7 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
   }
 
   void startTotalTimer() {
-    setImageUsed();
+    // setImageUsed();
     totalDuration = Duration(seconds: totalDurationInSeconds);
     totalCountdownTimer =
         Timer.periodic(const Duration(seconds: 1), (_) => setTotalCountDown());
@@ -199,17 +226,17 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
   final List<ExplanationData> data = [
     ExplanationData(
         description:
-            "Đầu tiên nhấn vào ô trống 'Nhập từ ở đây' bàn phím sẽ hiện lên ngay sau đó",
+        "Đầu tiên nhấn vào ô trống 'Nhập từ ở đây' bàn phím sẽ hiện lên ngay sau đó",
         title: "Trò chơi Tìm từ bắt đầu với",
         localImageSrc:
-            "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzYzYjcyMzY0YTEzYTg4MGEyMGUwZmNmNmUzYjE2N2U3M2NhNzAyNCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/ry4d0GdvFaHjmdZRHK/giphy.gif",
+        "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzYzYjcyMzY0YTEzYTg4MGEyMGUwZmNmNmUzYjE2N2U3M2NhNzAyNCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/ry4d0GdvFaHjmdZRHK/giphy.gif",
         backgroundColor: AppColors.primaryColor),
     ExplanationData(
         description:
-            "Nếu bạn trả lời đúng liên tiếp trên 3 bức ảnh. Nó sẽ được lưu trong biểu tượng hình thẻ khóa",
+        "Nếu bạn trả lời đúng liên tiếp trên 3 bức ảnh. Nó sẽ được lưu trong biểu tượng hình thẻ khóa",
         title: "Trò chơi Tìm từ bắt đầu với",
         localImageSrc:
-            "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmMwNDJhMTQzOWFmMzNjZGU0OTMwY2ZiODNmNmRkNjkwZmY4YjEyZCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/Rhn1uVvix3MaCSr9jG/giphy.gif",
+        "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmMwNDJhMTQzOWFmMzNjZGU0OTMwY2ZiODNmNmRkNjkwZmY4YjEyZCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/Rhn1uVvix3MaCSr9jG/giphy.gif",
         backgroundColor: AppColors.primaryColor),
   ];
 
@@ -220,8 +247,8 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
       context,
       MaterialPageRoute(
           builder: (context) => OnBoarding(
-                data: data,
-              )),
+            data: data,
+          )),
     );
 
     // When a BuildContext is used from a StatefulWidget, the mounted property
@@ -255,17 +282,17 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
     setState(() {
       isCorrect = false;
       currentQuestion++;
-      currentKey = getCurrentKeyValue(imagesAssetPath[currentQuestion]);
+      currentKey = getCurrentKeyValue(gameData[currentQuestion]['key']);
     });
     if (currentQuestion == 10) {
       handleEndGame();
     }
-    scaleRatio = calculateImageScale(currentKey);
+    scaleRatio = calculateImageScale(currentQuestion);
     startQuestionTimer();
   }
 
   bool checkEndGame() {
-    if (currentQuestion == 10) {
+    if (currentQuestion ==10) {
       return true;
     }
     return false;
@@ -276,7 +303,7 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
       context,
       MaterialPageRoute(
           builder: (context) => ImagePassScreen(
-              imagePass: ImagePass("o", solutionAssetPathUsed))),
+              imagePass: ImagePass("o", imgUserPass))),
     );
     if (result != null) {
       bool parsedResult = result.toLowerCase() == "true";
@@ -285,27 +312,36 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
   }
 
   Future<void> handleEndGame() async {
-    setCancelQuestionTimer();
-
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList('imageUsedAttendtion1', imagesAssetPathUsed);
-    await prefs.setStringList(
-        'imageSolutionAttendtion1', solutionAssetPathUsed);
-    await prefs.setStringList('solutionAssetPathUsed', solutionAssetPathUsed);
     setState(() {
       endGame = true;
     });
+    setCancelQuestionTimer();
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+
     int correctAnswer = point ~/ POINT_PER_CORRECT_ANSWER;
     int avgTime = calculateAvgTime(correctAnswer);
     int bonusPoint = calculateBonusPoint(avgTime);
     int totalPoint = point + bonusPoint;
+    List<String> imgUserPassString = imgUserPass.map((item) => item['key'].toString()).toList();
+    String result = imgUserPass.map((item) => item['key'].toString()).join(',');
+
+    print("dáiuhdiaushduiashdu${imgUserPassString}");
+    print("dáiuhdiaushduiashdu${imgUserPass}");
+
     _saveDailyAtte();
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-          builder: (context) =>
-              ResultScreen(result: Result(bonusPoint, totalPoint, avgTime))),
+        builder: (context) => ResultScreen(
+          result: Result(bonusPoint, totalPoint, avgTime),
+          passImg: result,
+        ),
+      ),
     );
+
+
   }
 
   void restartGame() {
@@ -317,55 +353,28 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
     endGame = false;
 
     setupImages();
-    scaleRatio = calculateImageScale(currentKey);
+    scaleRatio = calculateImageScale(currentQuestion);
     // startTotalTimer();
     startQuestionTimer();
   }
 
   // Image & Image Data
   int getCurrentKeyValue(String imageName) {
-    String key = imageName.split("/").last.split(".").first;
-    return int.parse(key);
+    // String key = imageName.split("/").last.split(".").first;
+    return int.parse(imageName);
   }
 
-  Future<void> _loadAssetsFiles() async {
-    final manifestContent = await rootBundle.loadString('AssetManifest.json');
-    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
-
-    // Load Path
-    final solutionImagePath = manifestMap.keys
-        .where((String key) => key.contains('images/'))
-        .where((String key) => key.contains('Attention/'))
-        .where((String key) => key.contains('Solution/'))
-        .where((String key) => key.contains('.png'))
-        .toList();
-
-    final attentionImagePath = manifestMap.keys
-        .where((String key) => key.contains('images/'))
-        .where((String key) => key.contains('Attention/'))
-        .where((String key) => key.contains('Question/'))
-        .where((String key) => key.contains('.png'))
-        .toList();
-    // imagesAssetPathUsed =["aa"];
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    imagesAssetPathUsed = prefs.getStringList("imageUsedAttendtion1") ?? [];
-
-    solutionAssetPath = solutionImagePath;
-    attentionImagePath
-        .removeWhere((element) => imagesAssetPathUsed.contains(element));
-    if (attentionImagePath.length >= 10) {
-      imagesAssetPath = attentionImagePath;
-    }
-  }
 
   void setupImages() {
-    imagesAssetPath.shuffle();
-
-    if (imagesAssetPath.isEmpty) {
-      handleEndGame();
-    }
+    // imagesAssetPath.shuffle();
+    //
+    // if (imagesAssetPath.isEmpty) {
+    //   handleEndGame();
+    // }
     setState(() {
-      currentKey = getCurrentKeyValue(imagesAssetPath[currentQuestion]);
+
+      currentKey = getCurrentKeyValue(gameData[currentQuestion]['key']);
+
     });
   }
 
@@ -375,10 +384,10 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
   void onTapDown(BuildContext context, TapDownDetails details) {
     print(details.localPosition.dx);
     print(details.localPosition.dy);
-    var imageOriginalWidth = gameData[currentKey - 1]["size"]["x"];
-    var imageOriginalHeight = gameData[currentKey - 1]["size"]["y"];
-    var resultOriginalWidth = gameData[currentKey - 1]["result"]["x"];
-    var resultOriginalHeight = gameData[currentKey - 1]["result"]["y"];
+    var imageOriginalWidth = gameData[currentQuestion]["size"]["x"];
+    var imageOriginalHeight = gameData[currentQuestion]["size"]["y"];
+    var resultOriginalWidth = gameData[currentQuestion]["result"]["x"];
+    var resultOriginalHeight = gameData[currentQuestion]["result"]["y"];
 
     double resultXFromCenterImage =
         resultOriginalWidth - imageOriginalWidth / 2;
@@ -411,39 +420,56 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
     }
   }
 
+
+
+  // Future<void> CountCorrect() async {
+  //   if (isCorrect == true) {
+  //     count++;
+  //   } else if (isCorrect == false) {
+  //     count = 0;
+  //   }
+  //
+  //
+  //   if (count >= 1) {
+  //
+  //     imgUserPass.add(currentQuestion);
+  //     filteredData = filterDataByKey(gameData, currentQuestion + 1);
+  //     print("object$filteredData");
+  //     print("objecta$imgUserPass");
+  //
+  //   }
+  //
+  //   // setState(() {
+  //   //   isCorrect = true;
+  //   //   point += POINT_PER_CORRECT_ANSWER;
+  //   //
+  //   //
+  //   // });
+  //   // await Future.delayed(Duration(seconds: 3));
+  //   // nextQuestion();
+  //   // if (checkEndGame()) {
+  //   //   handleEndGame();
+  //   // }
+  // }
+
   Future<void> CountCorrect() async {
     if (isCorrect == true) {
       count++;
     } else if (isCorrect == false) {
       count = 0;
     }
-    Set<String> uniqueItems = Set<String>.from(imagesAssetPathUsed);
 
     if (count >= 1) {
-      for (var i = 0; i < count; i++) {
-        uniqueItems.add(imagesAssetPath[currentQuestion - i]);
-      }
-      imagesAssetPathUsed = List<String>.from(uniqueItems);
-      Set<String> uniqueSolutionItems = Set<String>.from(solutionAssetPathUsed);
-      for (var i = 0; i < imagesAssetPathUsed.length; i++) {
-        uniqueSolutionItems.add(solutionAssetPath.firstWhere((element) =>
-            element.split("/").last == imagesAssetPathUsed[i].split("/").last));
-      }
-      solutionAssetPathUsed = List<String>.from(uniqueSolutionItems);
-    }
+      List<String> isNew =[];
+      print("check$currentKey");
+      isNew.add(currentKey.toString());
+      findAndRemoveItemsByKeys(isNew, delete: false);
+      print(imgUserPass);
 
-    // setState(() {
-    //   isCorrect = true;
-    //   point += POINT_PER_CORRECT_ANSWER;
-    //
-    //
-    // });
-    // await Future.delayed(Duration(seconds: 3));
-    // nextQuestion();
-    // if (checkEndGame()) {
-    //   handleEndGame();
-    // }
+
+    }
   }
+
 
   Future<void> handleCorrectAnswer() async {
     setCancelQuestionTimer();
@@ -463,8 +489,8 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
   }
 
   double calculateImageScale(int key) {
-    int imageOriginalWidth = gameData[key - 1]["size"]["x"];
-    int imageOriginalHeight = gameData[key - 1]["size"]["y"];
+    int imageOriginalWidth = gameData[key ]["size"]["x"];
+    int imageOriginalHeight = gameData[key ]["size"]["y"];
     double widthRatio = imageOriginalWidth / boxWidth;
     double heightRatio = imageOriginalHeight / boxHeight;
     double result = 1.0;
@@ -480,7 +506,7 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
 
   int calculateAvgTime(int totalCorrectAnswers) {
     double averageTotalTime =
-        totalCorrectAnswers != 0 ? totalAnswerTime / totalCorrectAnswers : 0.0;
+    totalCorrectAnswers != 0 ? totalAnswerTime / totalCorrectAnswers : 0.0;
     return averageTotalTime.round();
   }
 
@@ -538,20 +564,32 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
     super.initState();
 
     setStaryPlay();
-    setStartImg();
-    setImageUsed();
     CountCorrect();
     dialog = CustomDialog(context: context);
-    _loadAssetsFiles().then((val) {
-      // setImageUsed();
-      setupImages();
-      readJson( key_data).then((imageData) {
-        gameData = imageData;
-        scaleRatio = calculateImageScale(currentKey);
-        // startTotalTimer();
+
+
+      readJson( key_data).then((imageData) async {
+        await Future.delayed(Duration(milliseconds:1000));
+        List shuffledData = List.from(imageData);
+        shuffledData.shuffle();
+
+        gameData = shuffledData;
+        await setStartImg();
+        setupImages();
+        scaleRatio = calculateImageScale(currentQuestion);
+
         startQuestionTimer();
       });
-    });
+
+  }
+
+
+  List<String> getImageUrls(List<dynamic> data) {
+    return data
+        .map((item) => item['img']?.toString())
+        .where((img) => img != null)
+        .cast<String>()
+        .toList();
   }
 
   @override
@@ -661,14 +699,14 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
                       //   width:400,
                     ),
                   ),
-            
+
                   // SvgPicture.asset(
                   //   'assets/images/business-lady-do-multi-tasking.svg',
                   //   // fit: BoxFit.fitHeight,
                   //   height:200,
                   //   width:400,
                   // ),
-            
+
                   Column(
                     children: [
                       Container(
@@ -686,18 +724,18 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
                             bottomLeft: Radius.circular(20),
                           ),
                         ),
-            
+
                         child: Scaffold(
                           backgroundColor: Colors.transparent,
                           // height:300,
-            
+
                           body: Center(
                             child: Column(
                               children: [
                                 //SizedBox(height: AppColors.bottomArea),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
@@ -757,7 +795,7 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
                                 SizedBox(height: size.height * 0.01),
                                 Container(
                                   margin:
-                                      const EdgeInsets.symmetric(horizontal: 20),
+                                  const EdgeInsets.symmetric(horizontal: 20),
                                   height: 30,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
@@ -776,7 +814,7 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(30),
+                                                BorderRadius.circular(30),
                                                 color: LightColors.kDarkGreen,
                                               ),
                                             ),
@@ -804,7 +842,7 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
                                 SizedBox(height: size.height * 0.03),
                                 Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Center(
                                         // padding: const EdgeInsets.only(
@@ -834,7 +872,7 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
                           ),
                         ),
                       ),
-            
+
                       Container(
                         // Add the line below
                         margin: const EdgeInsets.only(left: 20.0, right: 20.0),
@@ -864,81 +902,83 @@ class _AttentionGameOneState extends State<AttentionGameOne> {
                       ),
                       Column(
                         children: [
-                          // SizedBox(height: 30),
-                          imagesAssetPath.isNotEmpty && gameData.isNotEmpty
-                              ? Column(children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 10),
-                                    child: Text(
-                                      gameData[currentKey - 1]["title"],
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: boxHeight,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20),
-                                      child: Material(
-                                        child: !isCorrect
-                                            ? Ink.image(
-                                                image: AssetImage(imagesAssetPath[
-                                                    currentQuestion]),
-                                                fit: BoxFit.scaleDown,
-                                                child: InkWell(
-                                                  onTapDown: !endGame
-                                                      ? (TapDownDetails
-                                                              details) =>
-                                                          onTapDown(
-                                                              context, details)
-                                                      : null,
-                                                ),
-                                              )
-                                            : Stack(
-                                                children: [
-                                                  Container(
-                                                    width: boxWidth,
-                                                    height: boxHeight,
-                                                    decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                        image: AssetImage(imagesAssetPath[
-                                                        currentQuestion]),
-                                                        fit: BoxFit.scaleDown,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Positioned(
-                                                    left: xx - 35,
-                                                    // Đặt giá trị left theo yêu cầu của bạn
-                                                    top: yy -35,
-                                                    // Đặt giá trị top theo yêu cầu của bạn
-                                                    child: Container(
-                                                      width: 70,
-                                                      height: 70,
-                                                      decoration: BoxDecoration(
-                                                        shape: BoxShape.circle,
-                                                        color: Colors.transparent,
-                                                        border: Border.all(
-                                                          color: Colors.red,
-                                                          width: 5,
-                                                        ),
-                                                      ),
-                                                  ),
-                                                  )],
-                                              ),
-                                      ),
-                                    ),
-                                  ),
-                                ])
-                              : const Text(
-                                  "Hiện tại thư viện câu hỏi đang được cập nhập. Bạn vui lòng quay lại sau nha !!!",
+                          gameData.isNotEmpty
+                              ? Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: Text(
+                                  gameData[currentQuestion]["title"],
                                   textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w500),
                                 ),
+                              ),
+                              SizedBox(
+                                height: boxHeight,
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: !isCorrect
+                                      ? InkWell(
+                                    onTapDown: !endGame
+                                        ? (TapDownDetails details) =>
+                                        onTapDown(context, details)
+                                        : null,
+                                    child: Image.network(
+                                      gameData[currentQuestion]['img'],
+                                      fit: BoxFit.scaleDown,
+                                      loadingBuilder: (context, child, loadingProgress) {
+                                        if (loadingProgress == null) return child;
+                                        return const Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      },
+                                    ),
+                                  )
+                                      : Stack(
+                                    children: [
+                                      Container(
+                                        width: boxWidth,
+                                        height: boxHeight,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                                gameData[currentQuestion]['img']),
+                                            fit: BoxFit.scaleDown,
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        left: xx - 35,
+                                        top: yy - 35,
+                                        child: Container(
+                                          width: 70,
+                                          height: 70,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.transparent,
+                                            border: Border.all(
+                                              color: Colors.red,
+                                              width: 5,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                              : const Text(
+                            "Hiện tại thư viện câu hỏi đang được cập nhật. Bạn vui lòng quay lại sau nha !!!",
+                            textAlign: TextAlign.center,
+                          ),
                         ],
                       )
+
                       //   Expanded(
                       //     flex: 1,
                       //     child: Column(

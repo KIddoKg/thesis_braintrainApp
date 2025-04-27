@@ -9,8 +9,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ResultScreen extends StatefulWidget {
   final Result result;
+   String  passImg;
 
-  ResultScreen({required this.result});
+  ResultScreen({super.key, required this.result, required this.passImg});
 
   @override
   State<ResultScreen> createState() => _ResultScreenState();
@@ -32,17 +33,12 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   void sendData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+
     filter["score"] = widget.result.score;
     filter["playTime"] = widget.result.time;
-    List<String> covert = prefs.getStringList("solutionAssetPathUsed")?? [];
 
-    String cleanedPathsString = covert.map((path) {
-      return path.replaceAll('[', '').replaceAll(']', '');
-    }).join(','); // You can change the separator ',' to any other if needed
-    List<String> numbers = RegExp(r'\d+').allMatches(cleanedPathsString).map((match) => match.group(0)!).toList();
-    String resultString = numbers.join(', ');
-    filter["wordList"] = resultString;
+
+    filter["wordList"] = widget.passImg;
     //print(cleanedPathsString);
 
     var res = await Services.instance.setContext(context).addDataPlayGameUser(filter: filter);

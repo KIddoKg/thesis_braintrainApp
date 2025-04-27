@@ -10,7 +10,7 @@ class ImagePassScreen extends StatelessWidget {
 
   ImagePassScreen({required this.imagePass});
   late double screenHeight, screenWidth, boxHeight, boxWidth;
-  List<String> imageUrls = [];
+  List  imageUrls = [];
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
@@ -108,25 +108,21 @@ class ImagePassScreen extends StatelessWidget {
                             margin: const EdgeInsets.all(15),
                             width: boxWidth,
                             height: boxHeight,
-                            // alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              // border: widget.subCategory!.parts[index].isSelected! ?
-                              // Border.all(color: Colors.red, width: 7)
-
                                 borderRadius: BorderRadius.circular(25),
                                 image: DecorationImage(
-                                    image: AssetImage(imagePass.message[index]
-                                    ), fit: BoxFit.scaleDown
+                                  image: NetworkImage(imagePass.message[index]['img']), // Sửa từ Image.network() thành NetworkImage()
+                                  fit: BoxFit.scaleDown,
                                 ),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.1),
                                     offset: Offset.zero,
-                                    // blurRadius: 10
-                                  )
+                                  ),
                                 ]
                             ),
                           ),
+
                           // Container(
                           //     margin: EdgeInsets.only(left: 25),
                           //     child: Text(widget.subCategory!.parts[index].name!,

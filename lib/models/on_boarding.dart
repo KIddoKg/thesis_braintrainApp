@@ -29,18 +29,18 @@ class OnBoardingPageWidget extends StatelessWidget {
                 Text(
                   model.title,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Text(
                   model.subTitle,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               ],
             ),
             Text(
               model.counterText,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(
               height: 80.0,
