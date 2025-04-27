@@ -13,6 +13,24 @@ import 'package:vector_math/vector_math.dart' as v_math;
 import 'package:brain_train_app/models/result_model.dart';
 import 'package:brain_train_app/models/user_model.dart';
 import 'light_colors.dart';
+class ResponsiveWrapper extends StatelessWidget {
+  final Widget child;
+
+  const ResponsiveWrapper({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+
+    // Điều chỉnh kích thước toàn bộ ứng dụng theo screenWidth
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(
+        textScaleFactor: screenWidth < 600 ? 1.0 : 1.2,  // Ví dụ thay đổi text scale
+      ),
+      child: child,
+    );
+  }
+}
 
 class MyHours extends StatelessWidget {
   int hours;

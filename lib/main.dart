@@ -7,13 +7,14 @@ import 'package:brain_train_app/screens/wrapper.dart';
 import 'package:brain_train_app/services/AuthStorage.dart';
 import 'package:brain_train_app/shared/app_styles.dart';
 import 'package:brain_train_app/shared/notification_service.dart';
+import 'package:brain_train_app/shared/share_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:responsive_framework/responsive_framework.dart';
 // import 'package:flutter_background/flutter_background.dart';
 // import 'package:flutter_background_service/flutter_background_service.dart';
 // import 'package:flutter_background_service_android/flutter_background_service_android.dart';
@@ -200,20 +201,32 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   // This widget is the root of your application.
   @override
+
+
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
       return GetMaterialApp(
         debugShowCheckedModeBanner: false,
+        builder: (context, child) => ResponsiveBreakpoints.builder(
+          child: child!,
+
+          breakpoints: [
+            const Breakpoint(start: 0, end: 450, name: MOBILE),
+            const Breakpoint(start: 451, end: 800, name: TABLET),
+            const Breakpoint(start: 801, end: 1920, name: DESKTOP),
+            const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
+          ],
+        ),
         home: FutureBuilder(
           future: authStorage.getAccessToken(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               final accessToken = snapshot.data;
-              // decide which page to show based on the presence of the access token
+              // Decide which page to show based on the presence of the access token
               if (accessToken != null && accessToken != "") {
                 return BottomNavBar(index: 1);
               } else {
-                return const LoginScreen();
+                return ResponsiveWrapper(child: const LoginScreen());
               }
             }
             return const CircularProgressIndicator();
@@ -239,6 +252,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       );
     });
   }
+
 }
 
 class HomeWrapper extends StatelessWidget {

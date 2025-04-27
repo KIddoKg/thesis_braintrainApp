@@ -535,298 +535,284 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                     //   width:400,
                   ),
                 ),
-                Column(
-                  children: [
-                    Container(
-                      // margin: const EdgeInsets.all(16),
-                      height: size.height * 0.60,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 1, horizontal: 16),
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFFFFD740), Color(0xFFF9A825)],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        // margin: const EdgeInsets.all(16),
+                        height: size.height * 0.60,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 1, horizontal: 16),
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Color(0xFFFFD740), Color(0xFFF9A825)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                          ),
                         ),
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                        ),
-                      ),
-                      child: Scaffold(
-                        backgroundColor: Colors.transparent,
-                        // height:300,
-                        body: Center(
-                          child: Column(
-                            children: [
-                              Column(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 6, horizontal: 2),
-                                    child: Column(
-                                      children: [
-                                        //SizedBox(height: AppColors.bottomArea),
-                                        Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                IconButton(
-                                                  onPressed: () async {
-                                                    showExitDialog(context);
-                                                    stopTime = true;
-                                                  },
-                                                  icon: const Icon(
-                                                    Icons
-                                                        .arrow_circle_left_outlined,
-                                                    size: 40,
+                        child: Scaffold(
+                          backgroundColor: Colors.transparent,
+                          // height:300,
+                          body: Center(
+                            child: Column(
+                              children: [
+                                Column(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 6, horizontal: 2),
+                                      child: Column(
+                                        children: [
+                                          //SizedBox(height: AppColors.bottomArea),
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  IconButton(
+                                                    onPressed: () async {
+                                                      showExitDialog(context);
+                                                      stopTime = true;
+                                                    },
+                                                    icon: const Icon(
+                                                      Icons
+                                                          .arrow_circle_left_outlined,
+                                                      size: 40,
+                                                    ),
+                                                    color: Colors.black,
                                                   ),
-                                                  color: Colors.black,
-                                                ),
-                                              ],
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  IconButton(
+                                                    onPressed: () {
+                                                      _navigateAndDisplaySelection(
+                                                          context);
+                                                    },
+                                                    icon: const Icon(
+                                                      Icons.question_mark_rounded,
+                                                      size: 35,
+                                                    ),
+                                                    color: Colors.black,
+                                                  ),
+                                                  IconButton(
+                                                    onPressed: () {},
+                                                    icon: const Icon(
+                                                      Icons.settings,
+                                                      size: 35,
+                                                    ),
+                                                    color: Colors.black,
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                              top: 5,
+                                              bottom: 5,
+                                              left: 5,
+                                              right: 5,
                                             ),
-                                            Row(
-                                              children: [
-                                                IconButton(
-                                                  onPressed: () {
-                                                    _navigateAndDisplaySelection(
-                                                        context);
-                                                  },
-                                                  icon: const Icon(
-                                                    Icons.question_mark_rounded,
-                                                    size: 35,
-                                                  ),
-                                                  color: Colors.black,
-                                                ),
-                                                IconButton(
-                                                  onPressed: () {},
-                                                  icon: const Icon(
-                                                    Icons.settings,
-                                                    size: 35,
-                                                  ),
-                                                  color: Colors.black,
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        const SizedBox(height: 10),
-                                        Container(
-                                          margin: const EdgeInsets.only(
-                                            top: 5,
-                                            bottom: 5,
-                                            left: 5,
-                                            right: 5,
-                                          ),
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 6, horizontal: 22),
-                                          height: size.height * 0.43,
-                                          decoration: BoxDecoration(
-                                            color: LightColors.kLightYellow,
-                                            borderRadius:
-                                            BorderRadius.circular(12),
-                                          ),
-                                          child: SingleChildScrollView(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  padding:
-                                                  const EdgeInsets.all(10),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Column(
-                                                            children: [
-                                                              InkWell(
-                                                                onTap:
-                                                                    () async {
-                                                                  if (count2 >
-                                                                      1 &&
-                                                                      timeHint ==
-                                                                          true) {
-                                                                    currentQues
-                                                                        .isDone =
-                                                                    false;
-                                                                    for (var i =
-                                                                    0;
-                                                                    i < 4;
-                                                                    i++) {
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 6, horizontal: 22),
+                                            height: size.height * 0.43,
+                                            decoration: BoxDecoration(
+                                              color: LightColors.kLightYellow,
+                                              borderRadius:
+                                              BorderRadius.circular(12),
+                                            ),
+                                            child: SingleChildScrollView(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    padding:
+                                                    const EdgeInsets.all(10),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            Column(
+                                                              children: [
+                                                                InkWell(
+                                                                  onTap:
+                                                                      () async {
+                                                                    if (count2 >
+                                                                        1 &&
+                                                                        timeHint ==
+                                                                            true) {
+                                                                      currentQues
+                                                                          .isDone =
+                                                                      false;
+                                                                      for (var i =
+                                                                      0;
+                                                                      i < 4;
+                                                                      i++) {
+                                                                        generatePuzzle(
+                                                                            next:
+                                                                            true);
+                                                                      }
+                                                                      generateHint();
+                                                                      timeHint =
+                                                                      false;
+                                                                      currentQues
+                                                                          .isFull =
+                                                                      false;
+                                                                    }
+                  
+                                                                  },
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .tungsten_outlined,
+                                                                    size: 45,
+                                                                    color:
+                                                                    ColorsHint,
+                                                                  ),
+                                                                ),
+                                                                _counter != 0
+                                                                    ? Text(
+                                                                  "$_counter",
+                                                                  style: const TextStyle(
+                                                                      color:
+                                                                      Colors.black),
+                                                                )
+                                                                    : const SizedBox(
+                                                                    height:
+                                                                    10)
+                                                              ],
+                                                            ),
+                                                            Column(
+                                                              children: [
+                                                                InkWell(
+                                                                  onTap: () {
+                                                                    if (resetcount ==
+                                                                        true &&
+                                                                        indexQues <
+                                                                            best) {
+                                                                      currentQues
+                                                                          .isDone =
+                                                                      false;
+                                                                      generatePuzzle(
+                                                                          next:
+                                                                          true);
+                                                                      // for (var i = 0;
+                                                                      // i < 4;
+                                                                      // i++) {
+                                                                      //   generatePuzzle(
+                                                                      //       next: true);
+                                                                      // }
+                  
+                                                                      startTimer();
+                                                                      currentQues
+                                                                          .isFull =
+                                                                      false;
+                  
+                                                                      setState(
+                                                                              () {
+                                                                            resetcount =
+                                                                            false;
+                                                                            resetHint =
+                                                                            true;
+                                                                          });
+                                                                    }
+                                                                  },
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .sync_outlined,
+                                                                    size: 45,
+                                                                    color:
+                                                                    ColorsReset,
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 10,
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Column(
+                                                              children: [
+                                                                InkWell(
+                                                                  onTap: () {
+                                                                    _timer
+                                                                        .cancel();
+                                                                    if (indexQues !=
+                                                                        0) {
+                                                                      generatePuzzle(
+                                                                          left:
+                                                                          true);
+                  
+                                                                      generateHintAll();
+                                                                    }
+                                                                  },
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .arrow_back_ios,
+                                                                    size: 45,
+                                                                    color:
+                                                                    ColorsBack,
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 10,
+                                                                )
+                                                              ],
+                                                            ),
+                                                            Column(
+                                                              children: [
+                                                                InkWell(
+                                                                  onTap: () {
+                                                                    _timer
+                                                                        .cancel();
+                                                                    if (currentQues
+                                                                        .isDone ==
+                                                                        true) {
+                                                                      startTimer();
                                                                       generatePuzzle(
                                                                           next:
                                                                           true);
                                                                     }
-                                                                    generateHint();
-                                                                    timeHint =
-                                                                    false;
-                                                                    currentQues
-                                                                        .isFull =
-                                                                    false;
-                                                                  }
-
-                                                                },
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .tungsten_outlined,
-                                                                  size: 45,
-                                                                  color:
-                                                                  ColorsHint,
-                                                                ),
-                                                              ),
-                                                              _counter != 0
-                                                                  ? Text(
-                                                                "$_counter",
-                                                                style: const TextStyle(
+                                                                  },
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .arrow_forward_ios,
+                                                                    size: 45,
                                                                     color:
-                                                                    Colors.black),
-                                                              )
-                                                                  : const SizedBox(
-                                                                  height:
-                                                                  10)
-                                                            ],
-                                                          ),
-                                                          Column(
-                                                            children: [
-                                                              InkWell(
-                                                                onTap: () {
-                                                                  if (resetcount ==
-                                                                      true &&
-                                                                      indexQues <
-                                                                          best) {
-                                                                    currentQues
-                                                                        .isDone =
-                                                                    false;
-                                                                    generatePuzzle(
-                                                                        next:
-                                                                        true);
-                                                                    // for (var i = 0;
-                                                                    // i < 4;
-                                                                    // i++) {
-                                                                    //   generatePuzzle(
-                                                                    //       next: true);
-                                                                    // }
-
-                                                                    startTimer();
-                                                                    currentQues
-                                                                        .isFull =
-                                                                    false;
-
-                                                                    setState(
-                                                                            () {
-                                                                          resetcount =
-                                                                          false;
-                                                                          resetHint =
-                                                                          true;
-                                                                        });
-                                                                  }
-                                                                },
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .sync_outlined,
-                                                                  size: 45,
-                                                                  color:
-                                                                  ColorsReset,
+                                                                    ColorsNext,
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                              const SizedBox(
-                                                                height: 10,
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Column(
-                                                            children: [
-                                                              InkWell(
-                                                                onTap: () {
-                                                                  _timer
-                                                                      .cancel();
-                                                                  if (indexQues !=
-                                                                      0) {
-                                                                    generatePuzzle(
-                                                                        left:
-                                                                        true);
-
-                                                                    generateHintAll();
-                                                                  }
-                                                                },
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .arrow_back_ios,
-                                                                  size: 45,
-                                                                  color:
-                                                                  ColorsBack,
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                height: 10,
-                                                              )
-                                                            ],
-                                                          ),
-                                                          Column(
-                                                            children: [
-                                                              InkWell(
-                                                                onTap: () {
-                                                                  _timer
-                                                                      .cancel();
-                                                                  if (currentQues
-                                                                      .isDone ==
-                                                                      true) {
-                                                                    startTimer();
-                                                                    generatePuzzle(
-                                                                        next:
-                                                                        true);
-                                                                  }
-                                                                },
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .arrow_forward_ios,
-                                                                  size: 45,
-                                                                  color:
-                                                                  ColorsNext,
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                height: 10,
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      )
-                                                    ],
+                                                                const SizedBox(
+                                                                  height: 10,
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                                Text(
-                                                  "Câu hỏi số ${indexQues + 1}",
-                                                  style: const TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.black,
-                                                    fontWeight:
-                                                    FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Container(
-                                                  padding:const EdgeInsets.all(10),
-                                                  margin: const EdgeInsets.fromLTRB(
-                                                      20, 15, 30, 10),
-                                                  alignment: Alignment.center,
-                                                  child: Text(
-                                                    textAlign: TextAlign.center,
-                                                    "${currentQues.question ?? ''}",
+                                                  Text(
+                                                    "Câu hỏi số ${indexQues + 1}",
                                                     style: const TextStyle(
                                                       fontSize: 20,
                                                       color: Colors.black,
@@ -834,230 +820,246 @@ class _WordFindWidgetState extends State<WordFindWidget> {
                                                       FontWeight.bold,
                                                     ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  padding: const EdgeInsets.symmetric(
-                                                      vertical: 30,
-                                                      horizontal: 0),
-                                                  alignment: Alignment.center,
-                                                  child: LayoutBuilder(
-                                                    builder:
-                                                        (context, constraints) {
-                                                      return Row(
-                                                        crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                        mainAxisSize:
-                                                        MainAxisSize.max,
-                                                        children: currentQues
-                                                            .puzzles
-                                                            .map((puzzle) {
-                                                          // later change color based condition
-                                                          Color? color;
-
-                                                          if (currentQues
-                                                              .isDone) {
-                                                            color = Colors
-                                                                .green[600];
-                                                          } else if (puzzle
-                                                              .hintShow) {
-                                                            color = Colors
-                                                                .green[600];
-                                                          } else if (currentQues
-                                                              .isFull) {
-                                                            color = Colors.red;
-                                                          } else {
-                                                            color = LightColors
-                                                                .kLightYellow2;
-                                                          }
-
-                                                          return InkWell(
-                                                            onTap: () {
-                                                              if (puzzle
-                                                                  .hintShow ||
-                                                                  currentQues
-                                                                      .isDone) {
-                                                                return;
-                                                              }
-                                                              currentQues
-                                                                  .isFull =
-                                                              false;
-                                                              // currentQues.isDone = false;
-                                                              puzzle
-                                                                  .clearValue();
-                                                              setState(() {});
-                                                            },
-                                                            child: Container(
-                                                              alignment:
-                                                              Alignment
-                                                                  .center,
-                                                              decoration:
-                                                              BoxDecoration(
-                                                                color: color,
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    10),
-                                                              ),
-                                                              width: constraints
-                                                                  .biggest
-                                                                  .width /
-                                                                  test -
-                                                                  6,
-                                                              height: constraints
-                                                                  .biggest
-                                                                  .width /
-                                                                  8,
-                                                              margin: const EdgeInsets
-                                                                  .all(3),
-                                                              child: Text(
-                                                                "${puzzle.currentValue ?? ''}"
-                                                                    .toUpperCase(),
-                                                                style:
-                                                                const TextStyle(
-                                                                  fontSize: 25,
-                                                                  fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }).toList(),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                                Center(
-                                                  child: InkWell(
-                                                    onTap: () async {
-                                                      if (resetHint == true) {
-                                                        generateHintAll();
-                                                        setState(() {
-                                                          resetHint = false;
-                                                          resetcount = true;
-                                                        });
-                                                      }
-                                                    },
-                                                    child: Icon(
-                                                      Icons
-                                                          .fluorescent_outlined,
-                                                      size: 45,
-                                                      color: ColorResetHint,
+                                                  Container(
+                                                    padding:const EdgeInsets.all(10),
+                                                    margin: const EdgeInsets.fromLTRB(
+                                                        20, 15, 30, 10),
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      textAlign: TextAlign.center,
+                                                      "${currentQues.question ?? ''}",
+                                                      style: const TextStyle(
+                                                        fontSize: 20,
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                        FontWeight.bold,
+                                                      ),
                                                     ),
                                                   ),
-                                                )
-                                              ],
+                                                  Container(
+                                                    padding: const EdgeInsets.symmetric(
+                                                        vertical: 30,
+                                                        horizontal: 0),
+                                                    alignment: Alignment.center,
+                                                    child: LayoutBuilder(
+                                                      builder:
+                                                          (context, constraints) {
+                                                        return Row(
+                                                          crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                          mainAxisSize:
+                                                          MainAxisSize.max,
+                                                          children: currentQues
+                                                              .puzzles
+                                                              .map((puzzle) {
+                                                            // later change color based condition
+                                                            Color? color;
+                  
+                                                            if (currentQues
+                                                                .isDone) {
+                                                              color = Colors
+                                                                  .green[600];
+                                                            } else if (puzzle
+                                                                .hintShow) {
+                                                              color = Colors
+                                                                  .green[600];
+                                                            } else if (currentQues
+                                                                .isFull) {
+                                                              color = Colors.red;
+                                                            } else {
+                                                              color = LightColors
+                                                                  .kLightYellow2;
+                                                            }
+                  
+                                                            return InkWell(
+                                                              onTap: () {
+                                                                if (puzzle
+                                                                    .hintShow ||
+                                                                    currentQues
+                                                                        .isDone) {
+                                                                  return;
+                                                                }
+                                                                currentQues
+                                                                    .isFull =
+                                                                false;
+                                                                // currentQues.isDone = false;
+                                                                puzzle
+                                                                    .clearValue();
+                                                                setState(() {});
+                                                              },
+                                                              child: Container(
+                                                                alignment:
+                                                                Alignment
+                                                                    .center,
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                  color: color,
+                                                                  borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                      10),
+                                                                ),
+                                                                width: constraints
+                                                                    .biggest
+                                                                    .width /
+                                                                    test -
+                                                                    6,
+                                                                height: constraints
+                                                                    .biggest
+                                                                    .width /
+                                                                    8,
+                                                                margin: const EdgeInsets
+                                                                    .all(3),
+                                                                child: Text(
+                                                                  "${puzzle.currentValue ?? ''}"
+                                                                      .toUpperCase(),
+                                                                  style:
+                                                                  const TextStyle(
+                                                                    fontSize: 25,
+                                                                    fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            );
+                                                          }).toList(),
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                                  Center(
+                                                    child: InkWell(
+                                                      onTap: () async {
+                                                        if (resetHint == true) {
+                                                          generateHintAll();
+                                                          setState(() {
+                                                            resetHint = false;
+                                                            resetcount = true;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: Icon(
+                                                        Icons
+                                                            .fluorescent_outlined,
+                                                        size: 45,
+                                                        color: ColorResetHint,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      // Add the line below
-                      margin: const EdgeInsets.only(left: 20.0, right: 20.0),
-                      // padding: const EdgeInsets.all(16),
-                      clipBehavior: Clip.hardEdge,
-                      height: 10,
-                      decoration: const BoxDecoration(
-                        color: Color(0xffffe0b2),
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(40),
-                          bottomLeft: Radius.circular(40),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      // Add the line below
-                      margin: const EdgeInsets.only(left: 35.0, right: 35.0),
-                      clipBehavior: Clip.hardEdge,
-                      height: 10,
-                      decoration: const BoxDecoration(
-                        color: Color(0xfffff3e0),
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 50),
-                    if (currentQues.isDone == false)
-                      Column(
-                        children: [
-                          Container(
-                            padding:const EdgeInsets.all(10),
-                            alignment: Alignment.center,
-                            child: GridView.builder(
-                              gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: 1,
-                                crossAxisCount: 5,
-                                crossAxisSpacing: 1,
-                                mainAxisSpacing: 4,
-                              ),
-                              itemCount: test, // later change
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                bool statusBtn = currentQues.puzzles.indexWhere(
-                                        (puzzle) =>
-                                    puzzle.currentIndex == index) >=
-                                    0;
-
-                                return LayoutBuilder(
-                                  builder: (context, constraints) {
-                                    Color? color = statusBtn
-                                    // ? Color(0xFFFFD600)
-                                    // : Color(0xFFFFFD9D);
-                                        ? const Color(0xFFFFF9EC)
-                                        : const Color(0xFFFFFD9D);
-                                    Color ColorsRemove;
-                                    if (statusBtn == true) {
-                                      ColorsRemove = LightColors.kLightYellow;
-                                    } else {
-                                      ColorsRemove = Colors.black;
-                                    }
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        color: color,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      // margin: ,
-                                      alignment: Alignment.center,
-                                      child: TextButton(
-                                        // height: constraints.biggest.height,
-                                        child: Text(
-                                          currentQues.arrayBtns[index]
-                                              .toUpperCase(),
-                                          style: TextStyle(
-                                            color: ColorsRemove,
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          if (!statusBtn) setBtnClick(index);
-                                        },
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                  ],
+                      Container(
+                        // Add the line below
+                        margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+                        // padding: const EdgeInsets.all(16),
+                        clipBehavior: Clip.hardEdge,
+                        height: 10,
+                        decoration: const BoxDecoration(
+                          color: Color(0xffffe0b2),
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(40),
+                            bottomLeft: Radius.circular(40),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        // Add the line below
+                        margin: const EdgeInsets.only(left: 35.0, right: 35.0),
+                        clipBehavior: Clip.hardEdge,
+                        height: 10,
+                        decoration: const BoxDecoration(
+                          color: Color(0xfffff3e0),
+                          borderRadius: BorderRadius.only(
+                            bottomRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 50),
+                      if (currentQues.isDone == false)
+                        Column(
+                          children: [
+                            Container(
+                              padding:const EdgeInsets.all(10),
+                              alignment: Alignment.center,
+                              child: GridView.builder(
+                                gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                  childAspectRatio: 1,
+                                  crossAxisCount: 5,
+                                  crossAxisSpacing: 1,
+                                  mainAxisSpacing: 4,
+                                ),
+                                itemCount: test, // later change
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  bool statusBtn = currentQues.puzzles.indexWhere(
+                                          (puzzle) =>
+                                      puzzle.currentIndex == index) >=
+                                      0;
+                  
+                                  return LayoutBuilder(
+                                    builder: (context, constraints) {
+                                      Color? color = statusBtn
+                                      // ? Color(0xFFFFD600)
+                                      // : Color(0xFFFFFD9D);
+                                          ? const Color(0xFFFFF9EC)
+                                          : const Color(0xFFFFFD9D);
+                                      Color ColorsRemove;
+                                      if (statusBtn == true) {
+                                        ColorsRemove = LightColors.kLightYellow;
+                                      } else {
+                                        ColorsRemove = Colors.black;
+                                      }
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          color: color,
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        // margin: ,
+                                        alignment: Alignment.center,
+                                        child: TextButton(
+                                          // height: constraints.biggest.height,
+                                          child: Text(
+                                            currentQues.arrayBtns[index]
+                                                .toUpperCase(),
+                                            style: TextStyle(
+                                              color: ColorsRemove,
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            if (!statusBtn) setBtnClick(index);
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                    ],
+                  ),
                 ),
               ],
             ),

@@ -87,6 +87,7 @@ dev_dependencies:
   #  firebase_database:
   permission_handler: ^11.0.1
   notification_center: ^0.0.3
+  responsive_framework: ^1.5.1
   device_info_plus:
 
 #  device_preview: ^1.1.0
